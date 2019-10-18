@@ -12,9 +12,8 @@
 		2A7089982359757000071FC3 /* SecureSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A70898A2359756F00071FC3 /* SecureSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */; };
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
-		2A7089B123599F5C00071FC3 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B023599F5C00071FC3 /* Base.swift */; };
-		2A7089B323599F6F00071FC3 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B223599F6F00071FC3 /* Child.swift */; };
-		2A7089B52359A6D600071FC3 /* NoSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B42359A6D600071FC3 /* NoSwizzlingTests.swift */; };
+		2A7089B123599F5C00071FC3 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B023599F5C00071FC3 /* Animal.swift */; };
+		2A7089B323599F6F00071FC3 /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B223599F6F00071FC3 /* Dog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +43,8 @@
 		2A7089A52359764F00071FC3 /* NotSecureSwizzlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotSecureSwizzlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSecureSwizzlingTests.swift; sourceTree = "<group>"; };
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A7089B023599F5C00071FC3 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
-		2A7089B223599F6F00071FC3 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
-		2A7089B42359A6D600071FC3 /* NoSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSwizzlingTests.swift; sourceTree = "<group>"; };
+		2A7089B023599F5C00071FC3 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		2A7089B223599F6F00071FC3 /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,11 +115,10 @@
 		2A7089A62359764F00071FC3 /* NotSecureSwizzlingTests */ = {
 			isa = PBXGroup;
 			children = (
-				2A7089B42359A6D600071FC3 /* NoSwizzlingTests.swift */,
 				2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
-				2A7089B023599F5C00071FC3 /* Base.swift */,
-				2A7089B223599F6F00071FC3 /* Child.swift */,
+				2A7089B023599F5C00071FC3 /* Animal.swift */,
+				2A7089B223599F6F00071FC3 /* Dog.swift */,
 			);
 			path = NotSecureSwizzlingTests;
 			sourceTree = "<group>";
@@ -279,9 +276,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A7089B323599F6F00071FC3 /* Child.swift in Sources */,
-				2A7089B123599F5C00071FC3 /* Base.swift in Sources */,
-				2A7089B52359A6D600071FC3 /* NoSwizzlingTests.swift in Sources */,
+				2A7089B323599F6F00071FC3 /* Dog.swift in Sources */,
+				2A7089B123599F5C00071FC3 /* Animal.swift in Sources */,
 				2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
