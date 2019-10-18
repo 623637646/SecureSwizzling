@@ -26,13 +26,13 @@ class NoSwizzlingTests: XCTestCase {
     func testChildInstance() {
         let subObject = Child()
         XCTAssert(subObject.onlyBaseMethod(log: "") == "Base")
-        XCTAssert(subObject.childCallBaseMethod(log: "") == "BaseChild")
+        XCTAssert(subObject.childCallBaseMethod(log: "") == "Base Child")
         XCTAssert(subObject.childNotCallBaseMethod(log: "") == "Child")
     }
     
     func testChildClass() {
         XCTAssert(Child.onlyBaseMethod(log: "") == "Base")
-        XCTAssert(Child.childCallBaseMethod(log: "") == "BaseChild")
+        XCTAssert(Child.childCallBaseMethod(log: "") == "Base Child")
         XCTAssert(Child.childNotCallBaseMethod(log: "") == "Child")
     }
 
