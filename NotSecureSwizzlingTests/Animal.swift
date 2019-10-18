@@ -24,9 +24,9 @@ class Animal: NSObject {
 extension Animal {
     
     @objc dynamic func _animal_shit() -> [String] {
-        var result = self._animal_shit()
-        result.append(_animalShitting)
         print(_animalShitting)
+        var result = self._animal_shit()
+        result.insert(_animalShitting, at: 0)
         return result
     }
     
