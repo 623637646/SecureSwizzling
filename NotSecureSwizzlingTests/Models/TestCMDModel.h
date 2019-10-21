@@ -14,11 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)getMethodNameInBase:(BOOL *)isCMDWrong;
 
+- (NSString *)getMethodNameInBoth:(BOOL *)isCMDWrong;
+
 @end
 
 @interface TestCMDModel : TestCMDBaseModel
 
-- (NSString *)getMethodName:(BOOL *)isCMDWrong;
+- (NSString *)getMethodNameInSubclass:(BOOL *)isCMDWrong;
 
 @end
 

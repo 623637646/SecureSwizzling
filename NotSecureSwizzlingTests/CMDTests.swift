@@ -15,7 +15,7 @@ class CMDTests: XCTestCase {
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
         
-        XCTAssert(obj.getMethodName(&isCMDWrong) == "getMethodName:")
+        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:")
         XCTAssert(isCMDWrong.boolValue == false)
         
         XCTAssert(obj._getMethodName(&isCMDWrong) == "_getMethodName:")
@@ -37,15 +37,15 @@ class CMDTests: XCTestCase {
     // override method + unsafe swizzling
     func testOverrideMethodWithSwizzledCMDNotSecure() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.getMethodName(_:)),
+                                       originalSel: #selector(TestCMDModel.getMethodName(inSubclass:)),
                                        swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
         
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
-        XCTAssert(obj.getMethodName(&isCMDWrong) == "_getMethodName:")
+        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "_getMethodName:")
         XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
         
-        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodName:")
+        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodNameInSubclass:")
         XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
     }
     
@@ -66,15 +66,15 @@ class CMDTests: XCTestCase {
     
 //    func testSwizzledCMDSecure() {
 //        XCTAssert(swizzle_CMDSecure(class: TestCMDModel.self,
-//                                    originalSel: #selector(TestCMDModel.getMethodName(_:)),
+//                                    originalSel: #selector(TestCMDModel.getMethodNameInSubclass(_:)),
 //                                    swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
 //
 //        let obj = TestCMDModel()
 //        var isCMDWrong: ObjCBool = false
-//        XCTAssert(obj.getMethodName(&isCMDWrong) == "_getMethodName:")
+//        XCTAssert(obj.getMethodNameInSubclass(&isCMDWrong) == "_getMethodName:")
 //        XCTAssert(isCMDWrong.boolValue == false)
 //
-////        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodName:")
+////        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodNameInSubclass:")
 ////        XCTAssert(isCMDWrong.boolValue == false)
 //    }
 
