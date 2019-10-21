@@ -43,10 +43,10 @@ class CMDTests: XCTestCase {
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
         XCTAssert(obj.getMethodName(&isCMDWrong) == "_getMethodName:")
-        XCTAssert(isCMDWrong.boolValue == true)
+        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
         
         XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodName:")
-        XCTAssert(isCMDWrong.boolValue == true)
+        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
     }
     
     // inherited method + unsafe swizzling
@@ -58,10 +58,10 @@ class CMDTests: XCTestCase {
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
         XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "_getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true)
+        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
         
         XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true)
+        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
     }
     
 //    func testSwizzledCMDSecure() {
