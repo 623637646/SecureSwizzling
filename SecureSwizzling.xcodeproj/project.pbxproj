@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A50D04E235DA87200D7D800 /* TestCMDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A50D04D235DA87200D7D800 /* TestCMDModel.m */; };
 		2A7089912359757000071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
 		2A7089962359757000071FC3 /* SecureSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089952359757000071FC3 /* SecureSwizzlingTests.swift */; };
 		2A7089982359757000071FC3 /* SecureSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A70898A2359756F00071FC3 /* SecureSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,6 +15,8 @@
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
 		2A7089B123599F5C00071FC3 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B023599F5C00071FC3 /* Animal.swift */; };
 		2A7089B323599F6F00071FC3 /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B223599F6F00071FC3 /* Dog.swift */; };
+		2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062C235DAB850007F0DE /* CMDTests.swift */; };
+		2AF4062F235DABAA0007F0DE /* Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062E235DABAA0007F0DE /* Swizzling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotSecureSwizzlingTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A50D04C235DA87200D7D800 /* TestCMDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCMDModel.h; sourceTree = "<group>"; };
+		2A50D04D235DA87200D7D800 /* TestCMDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCMDModel.m; sourceTree = "<group>"; };
 		2A7089872359756F00071FC3 /* SecureSwizzling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SecureSwizzling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A70898A2359756F00071FC3 /* SecureSwizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecureSwizzling.h; sourceTree = "<group>"; };
 		2A70898B2359756F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +51,8 @@
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A7089B023599F5C00071FC3 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		2A7089B223599F6F00071FC3 /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		2AF4062C235DAB850007F0DE /* CMDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDTests.swift; sourceTree = "<group>"; };
+		2AF4062E235DABAA0007F0DE /* Swizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A2E4A81235DAACA0029425B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A7089B023599F5C00071FC3 /* Animal.swift */,
+				2A7089B223599F6F00071FC3 /* Dog.swift */,
+				2A50D04C235DA87200D7D800 /* TestCMDModel.h */,
+				2A50D04D235DA87200D7D800 /* TestCMDModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2A70897D2359756F00071FC3 = {
 			isa = PBXGroup;
 			children = (
@@ -115,10 +134,12 @@
 		2A7089A62359764F00071FC3 /* NotSecureSwizzlingTests */ = {
 			isa = PBXGroup;
 			children = (
+				2A2E4A81235DAACA0029425B /* Models */,
+				2AF4062C235DAB850007F0DE /* CMDTests.swift */,
 				2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
-				2A7089B023599F5C00071FC3 /* Animal.swift */,
-				2A7089B223599F6F00071FC3 /* Dog.swift */,
+				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
+				2AF4062E235DABAA0007F0DE /* Swizzling.swift */,
 			);
 			path = NotSecureSwizzlingTests;
 			sourceTree = "<group>";
@@ -209,6 +230,7 @@
 					};
 					2A7089A42359764F00071FC3 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -276,8 +298,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */,
 				2A7089B323599F6F00071FC3 /* Dog.swift in Sources */,
 				2A7089B123599F5C00071FC3 /* Animal.swift in Sources */,
+				2A50D04E235DA87200D7D800 /* TestCMDModel.m in Sources */,
+				2AF4062F235DABAA0007F0DE /* Swizzling.swift in Sources */,
 				2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +526,7 @@
 		2A7089AD2359764F00071FC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NotSecureSwizzlingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -511,6 +537,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanni.NotSecureSwizzlingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NotSecureSwizzlingTests/NotSecureSwizzlingTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,6 +547,7 @@
 		2A7089AE2359764F00071FC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NotSecureSwizzlingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -529,6 +558,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanni.NotSecureSwizzlingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NotSecureSwizzlingTests/NotSecureSwizzlingTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
