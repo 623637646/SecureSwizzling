@@ -13,25 +13,25 @@ class CMDTests: XCTestCase {
     // override method + no-swizzling
     func testOverrideMethodWithoutSwizzling() {
         let obj = TestCMDModel()
-        var isCMDAndMethodEqual: ObjCBool = false
+        var isCMDWrong: ObjCBool = false
         
-        XCTAssert(obj.getMethodName(&isCMDAndMethodEqual) == "getMethodName:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+        XCTAssert(obj.getMethodName(&isCMDWrong) == "getMethodName:")
+        XCTAssert(isCMDWrong.boolValue == false)
         
-        XCTAssert(obj._getMethodName(&isCMDAndMethodEqual) == "_getMethodName:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+        XCTAssert(obj._getMethodName(&isCMDWrong) == "_getMethodName:")
+        XCTAssert(isCMDWrong.boolValue == false)
     }
     
     // inherited method + no-swizzling
     func testInheritedMethodWithoutSwizzling() {
         let obj = TestCMDModel()
-        var isCMDAndMethodEqual: ObjCBool = false
+        var isCMDWrong: ObjCBool = false
         
-        XCTAssert(obj.getMethodName(inBase: &isCMDAndMethodEqual) == "getMethodNameInBase:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+        XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
+        XCTAssert(isCMDWrong.boolValue == false)
         
-        XCTAssert(obj._getMethodName(inBase: &isCMDAndMethodEqual) == "_getMethodNameInBase:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+        XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "_getMethodNameInBase:")
+        XCTAssert(isCMDWrong.boolValue == false)
     }
     
     // override method + unsafe swizzling
@@ -41,12 +41,12 @@ class CMDTests: XCTestCase {
                                        swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
         
         let obj = TestCMDModel()
-        var isCMDAndMethodEqual: ObjCBool = false
-        XCTAssert(obj.getMethodName(&isCMDAndMethodEqual) == "_getMethodName:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == false)
+        var isCMDWrong: ObjCBool = false
+        XCTAssert(obj.getMethodName(&isCMDWrong) == "_getMethodName:")
+        XCTAssert(isCMDWrong.boolValue == true)
         
-        XCTAssert(obj._getMethodName(&isCMDAndMethodEqual) == "getMethodName:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == false)
+        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodName:")
+        XCTAssert(isCMDWrong.boolValue == true)
     }
     
     // inherited method + unsafe swizzling
@@ -56,12 +56,12 @@ class CMDTests: XCTestCase {
                                        swizzledSelector: #selector(TestCMDModel._getMethodName(inBase:))) == true)
         
         let obj = TestCMDModel()
-        var isCMDAndMethodEqual: ObjCBool = false
-        XCTAssert(obj.getMethodName(inBase: &isCMDAndMethodEqual) == "_getMethodNameInBase:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == false)
+        var isCMDWrong: ObjCBool = false
+        XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "_getMethodNameInBase:")
+        XCTAssert(isCMDWrong.boolValue == true)
         
-        XCTAssert(obj._getMethodName(inBase: &isCMDAndMethodEqual) == "getMethodNameInBase:")
-        XCTAssert(isCMDAndMethodEqual.boolValue == false)
+        XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
+        XCTAssert(isCMDWrong.boolValue == true)
     }
     
 //    func testSwizzledCMDSecure() {
@@ -70,12 +70,12 @@ class CMDTests: XCTestCase {
 //                                    swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
 //
 //        let obj = TestCMDModel()
-//        var isCMDAndMethodEqual: ObjCBool = false
-//        XCTAssert(obj.getMethodName(&isCMDAndMethodEqual) == "_getMethodName:")
-//        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+//        var isCMDWrong: ObjCBool = false
+//        XCTAssert(obj.getMethodName(&isCMDWrong) == "_getMethodName:")
+//        XCTAssert(isCMDWrong.boolValue == false)
 //
-////        XCTAssert(obj._getMethodName(&isCMDAndMethodEqual) == "getMethodName:")
-////        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+////        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodName:")
+////        XCTAssert(isCMDWrong.boolValue == false)
 //    }
 
 }

@@ -10,10 +10,10 @@
 
 @implementation TestCMDBaseModel
 
-- (NSString *)getMethodNameInBase:(BOOL *)isCMDAndMethodEqual
+- (NSString *)getMethodNameInBase:(BOOL *)isCMDWrong
 {
-    if (isCMDAndMethodEqual) {
-        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBase:"];
+    if (isCMDWrong) {
+        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBase:"];
     }
     return @"getMethodNameInBase:";
 }
@@ -22,10 +22,10 @@
 
 @implementation TestCMDModel
 
-- (NSString *)getMethodName:(BOOL *)isCMDAndMethodEqual
+- (NSString *)getMethodName:(BOOL *)isCMDWrong
 {
-    if (isCMDAndMethodEqual) {
-        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"getMethodName:"];
+    if (isCMDWrong) {
+        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodName:"];
     }
     return @"getMethodName:";
 }
@@ -35,18 +35,18 @@
 
 @implementation TestCMDModel (Swizzling)
 
-- (NSString *)_getMethodName:(BOOL *)isCMDAndMethodEqual
+- (NSString *)_getMethodName:(BOOL *)isCMDWrong
 {
-    if (isCMDAndMethodEqual) {
-        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"_getMethodName:"];
+    if (isCMDWrong) {
+        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodName:"];
     }
     return @"_getMethodName:";
 }
 
-- (NSString *)_getMethodNameInBase:(BOOL *)isCMDAndMethodEqual
+- (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong
 {
-    if (isCMDAndMethodEqual) {
-        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBase:"];
+    if (isCMDWrong) {
+        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBase:"];
     }
     return @"_getMethodNameInBase:";
 }
