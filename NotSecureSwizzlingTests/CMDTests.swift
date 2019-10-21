@@ -74,8 +74,8 @@ class CMDTests: XCTestCase {
 //        XCTAssert(obj.getMethodName(&isCMDAndMethodEqual) == "_getMethodName:")
 //        XCTAssert(isCMDAndMethodEqual.boolValue == true)
 //
-//        XCTAssert(obj._getMethodName(&isCMDAndMethodEqual) == "getMethodName:")
-//        XCTAssert(isCMDAndMethodEqual.boolValue == true)
+////        XCTAssert(obj._getMethodName(&isCMDAndMethodEqual) == "getMethodName:")
+////        XCTAssert(isCMDAndMethodEqual.boolValue == true)
 //    }
 
 }

@@ -44,5 +44,7 @@ func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSele
 //    let swizzledEncoding = method_getTypeEncoding(swizzledMethod)
 //    
 //    // swizzling
+//    class_replaceMethod(`class`, originalSel, swizzledIMP, originalTypeEncoding)
 //    
+//    return true
 //}
