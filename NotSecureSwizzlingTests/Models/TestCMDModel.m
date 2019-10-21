@@ -59,29 +59,31 @@
 - (NSString *)_getMethodNameInSubclass:(BOOL *)isCMDWrong
 {
     assert(isCMDWrong != NULL);
-    if (isCMDWrong) {
+    NSString *originalResult = [self _getMethodNameInSubclass:isCMDWrong];
+    if (isCMDWrong && *isCMDWrong == NO) {
         *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInSubclass:"];
     }
-    return @"_getMethodNameInSubclass:";
+    return [originalResult stringByAppendingString:@"_getMethodNameInSubclass:"];
 }
 
 - (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong
 {
     assert(isCMDWrong != NULL);
-    if (isCMDWrong) {
+    NSString *originalResult = [self _getMethodNameInBase:isCMDWrong];
+    if (isCMDWrong && *isCMDWrong == NO) {
         *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBase:"];
     }
-    return @"_getMethodNameInBase:";
+    return [originalResult stringByAppendingString:@"_getMethodNameInBase:"];
 }
 
 - (NSString *)_getMethodNameInBoth:(BOOL *)isCMDWrong
 {
     assert(isCMDWrong != NULL);
-    NSString *superResult = [super getMethodNameInBoth:isCMDWrong];
+    NSString *originalResult = [self _getMethodNameInBoth:isCMDWrong];
     if (isCMDWrong && *isCMDWrong == NO) {
         *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBoth:"];
     }
-    return [superResult stringByAppendingString:@"_getMethodNameInBoth:"];
+    return [originalResult stringByAppendingString:@"_getMethodNameInBoth:"];
 }
 
 @end
