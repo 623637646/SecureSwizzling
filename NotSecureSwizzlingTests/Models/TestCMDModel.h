@@ -10,7 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TestCMDModel : NSObject
+@interface TestCMDBaseModel : NSObject
+
+- (NSString *)getMethodNameInBase:(BOOL *)isCMDAndMethodEqual;
+
+@end
+
+@interface TestCMDModel : TestCMDBaseModel
 
 - (NSString *)getMethodName:(BOOL *)isCMDAndMethodEqual;
 
@@ -19,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TestCMDModel (Swizzling)
 
 - (NSString *)_getMethodName:(BOOL *)isCMDAndMethodEqual;
+
+- (NSString *)_getMethodNameInBase:(BOOL *)isCMDAndMethodEqual;
 
 @end
 

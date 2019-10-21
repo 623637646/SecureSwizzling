@@ -8,6 +8,18 @@
 
 #import "TestCMDModel.h"
 
+@implementation TestCMDBaseModel
+
+- (NSString *)getMethodNameInBase:(BOOL *)isCMDAndMethodEqual
+{
+    if (isCMDAndMethodEqual) {
+        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBase:"];
+    }
+    return @"getMethodNameInBase:";
+}
+
+@end
+
 @implementation TestCMDModel
 
 - (NSString *)getMethodName:(BOOL *)isCMDAndMethodEqual
@@ -29,6 +41,14 @@
         *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"_getMethodName:"];
     }
     return @"_getMethodName:";
+}
+
+- (NSString *)_getMethodNameInBase:(BOOL *)isCMDAndMethodEqual
+{
+    if (isCMDAndMethodEqual) {
+        *isCMDAndMethodEqual = [NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBase:"];
+    }
+    return @"_getMethodNameInBase:";
 }
 
 @end
