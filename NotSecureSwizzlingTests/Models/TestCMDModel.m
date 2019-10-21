@@ -56,13 +56,13 @@
 
 @implementation TestCMDModel (Swizzling)
 
-- (NSString *)_getMethodName:(BOOL *)isCMDWrong
+- (NSString *)_getMethodNameInSubclass:(BOOL *)isCMDWrong
 {
     assert(isCMDWrong != NULL);
     if (isCMDWrong) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodName:"];
+        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInSubclass:"];
     }
-    return @"_getMethodName:";
+    return @"_getMethodNameInSubclass:";
 }
 
 - (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong

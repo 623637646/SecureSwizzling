@@ -10,15 +10,15 @@ import XCTest
 
 class CMDTests: XCTestCase {
 
-    // override method + no-swizzling
-    func testOverrideMethodWithoutSwizzling() {
+    // normal method + no-swizzling
+    func testNormalMethodWithoutSwizzling() {
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
         
         XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:")
         XCTAssert(isCMDWrong.boolValue == false)
         
-        XCTAssert(obj._getMethodName(&isCMDWrong) == "_getMethodName:")
+        XCTAssert(obj._getMethodName(inSubclass: &isCMDWrong) == "_getMethodNameInSubclass:")
         XCTAssert(isCMDWrong.boolValue == false)
     }
     
@@ -34,19 +34,31 @@ class CMDTests: XCTestCase {
         XCTAssert(isCMDWrong.boolValue == false)
     }
     
-    // override method + unsafe swizzling
-    func testOverrideMethodWithSwizzledCMDNotSecure() {
+    // override method + no-swizzling
+    func testOverrideMethodWithoutSwizzling() {
+        let obj = TestCMDModel()
+        var isCMDWrong: ObjCBool = false
+        
+        XCTAssert(obj.getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:getMethodNameInBoth:")
+        XCTAssert(isCMDWrong.boolValue == false)
+        
+        XCTAssert(obj._getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:_getMethodNameInBoth:")
+        XCTAssert(isCMDWrong.boolValue == false)
+    }
+    
+    // normal method + unsafe swizzling
+    func testNormalMethodWithSwizzledCMDNotSecure() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
                                        originalSel: #selector(TestCMDModel.getMethodName(inSubclass:)),
-                                       swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
+                                       swizzledSelector: #selector(TestCMDModel._getMethodName(inSubclass:))) == true)
         
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
-        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "_getMethodName:")
-        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
+        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "_getMethodNameInSubclass:")
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
         
-        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodNameInSubclass:")
-        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
+        XCTAssert(obj._getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:")
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
     }
     
     // inherited method + unsafe swizzling
@@ -58,10 +70,26 @@ class CMDTests: XCTestCase {
         let obj = TestCMDModel()
         var isCMDWrong: ObjCBool = false
         XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "_getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
         
         XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true) // It's wrong here
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+    }
+    
+    // override method + unsafe swizzling
+    func testOverrideMethodWithSwizzledCMDNotSecure() {
+        XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
+                                       originalSel: #selector(TestCMDModel.getMethodName(inBoth:)),
+                                       swizzledSelector: #selector(TestCMDModel._getMethodName(inBoth:))) == true)
+        
+        
+        let obj = TestCMDModel()
+        var isCMDWrong: ObjCBool = false
+        XCTAssert(obj.getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:_getMethodNameInBoth:")
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        
+        XCTAssert(obj._getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:getMethodNameInBoth:")
+        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
     }
     
 //    func testSwizzledCMDSecure() {

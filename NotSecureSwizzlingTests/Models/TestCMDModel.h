@@ -26,9 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestCMDModel (Swizzling)
 
-- (NSString *)_getMethodName:(BOOL *)isCMDWrong;
+- (NSString *)_getMethodNameInSubclass:(BOOL *)isCMDWrong;
 
 - (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong;
+
+- (NSString *)_getMethodNameInBoth:(BOOL *)isCMDWrong;
 
 @end
 
