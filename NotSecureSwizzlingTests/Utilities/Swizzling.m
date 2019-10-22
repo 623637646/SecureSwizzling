@@ -11,8 +11,6 @@
 #import "TestCMDModel.h"
 #import "NotSecureSwizzlingTests-Swift.h"
 
-typedef IMP *IMPPointer;
-
 static void MethodSwizzle(id self, SEL _cmd, id arg1);
 static void (*MethodOriginal)(id self, SEL _cmd, id arg1);
 
@@ -22,7 +20,7 @@ static void MethodSwizzle(id self, SEL _cmd, TestCMDResult *result) {
     MethodOriginal(self, _cmd, result);
 }
 
-BOOL class_swizzleMethodAndStore(Class class, SEL original, IMP replacement, IMPPointer store) {
+BOOL class_swizzleMethodAndStore(Class class, SEL original, IMP replacement, IMP *store) {
     IMP imp = NULL;
     Method method = class_getInstanceMethod(class, original);
     if (method) {
