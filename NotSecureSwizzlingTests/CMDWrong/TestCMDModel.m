@@ -7,6 +7,7 @@
 //
 
 #import "TestCMDModel.h"
+#import "NotSecureSwizzlingTests-Swift.h"
 
 @implementation TestCMDBaseModel
 
