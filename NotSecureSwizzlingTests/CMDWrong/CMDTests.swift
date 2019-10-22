@@ -10,6 +10,8 @@ import XCTest
 
 class CMDTests: XCTestCase {
     
+    // MARK: No Swizzling
+    
     // only super method + no-swizzling
     func test_onlySuper_noSwizzling() {
         let obj = TestCMDModel()
@@ -46,8 +48,10 @@ class CMDTests: XCTestCase {
         XCTAssert(result.executedMethods == [.selfMethod, .superMethod])
     }
     
-    // only super method + swizzling
-    func test_onlySuper_swizzling() {
+    // MARK: Unsecure Swizzling
+    
+    // only super method + unsecure swizzling
+    func test_onlySuper_unsecureSwizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
                                        originalSel: #selector(TestCMDModel.onlySuper(_:)),
                                        swizzledSelector: #selector(TestCMDModel._onlySuper(_:))) == true)
@@ -62,8 +66,8 @@ class CMDTests: XCTestCase {
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
-    // only self method + swizzling
-    func test_onlySelf_swizzling() {
+    // only self method + unsecure swizzling
+    func test_onlySelf_unsecureSwizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
                                        originalSel: #selector(TestCMDModel.onlySelf(_:)),
                                        swizzledSelector: #selector(TestCMDModel._onlySelf(_:))) == true)
@@ -78,8 +82,8 @@ class CMDTests: XCTestCase {
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
     }
     
-    // in both method + swizzling
-    func test_inBoth_swizzling() {
+    // in both method + unsecure swizzling
+    func test_inBoth_unsecureSwizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
                                        originalSel: #selector(TestCMDModel.inBoth(_:)),
                                        swizzledSelector: #selector(TestCMDModel._(inBoth:))) == true)
@@ -94,19 +98,21 @@ class CMDTests: XCTestCase {
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
     }
 
+    // MARK: Secure Swizzling
     
-//    func testSwizzledCMDSecure() {
-//        XCTAssert(swizzle_CMDSecure(class: TestCMDModel.self,
-//                                    originalSel: #selector(TestCMDModel.getMethodNameInSubclass(_:)),
-//                                    swizzledSelector: #selector(TestCMDModel._getMethodName(_:))) == true)
-//
-//        let obj = TestCMDModel()
-//        var isCMDWrong: ObjCBool = false
-//        XCTAssert(obj.getMethodNameInSubclass(&isCMDWrong) == "_getMethodName:")
-//        XCTAssert(isCMDWrong.boolValue == false)
-//
-////        XCTAssert(obj._getMethodName(&isCMDWrong) == "getMethodNameInSubclass:")
-////        XCTAssert(isCMDWrong.boolValue == false)
-//    }
+    // only super method + secure swizzling
+    func test_onlySuper_secureSwizzling() {
+        
+        doit()
+        
+        let obj = TestCMDModel()
+        let result = TestCMDResult()
+        obj.onlySuper(result)
+        
+        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+    }
 
 }

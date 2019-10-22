@@ -29,22 +29,3 @@ func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSele
     }
     return true
 }
-
-//func swizzle_CMDSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
-//    // prepare
-//    guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
-//        return false
-//    }
-//    guard let swizzledMethod = class_getInstanceMethod(`class`, swizzledSelector) else {
-//        return false
-//    }
-//    let originalIMP = method_getImplementation(originalMethod)
-//    let swizzledIMP = method_getImplementation(swizzledMethod)
-//    let originalTypeEncoding = method_getTypeEncoding(originalMethod)
-//    let swizzledEncoding = method_getTypeEncoding(swizzledMethod)
-//    
-//    // swizzling
-//    class_replaceMethod(`class`, originalSel, swizzledIMP, originalTypeEncoding)
-//    
-//    return true
-//}
