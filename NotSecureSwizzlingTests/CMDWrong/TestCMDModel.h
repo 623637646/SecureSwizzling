@@ -8,29 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
+@class TestCMDResult;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TestCMDBaseModel : NSObject
+@interface TestCMDSuperModel : NSObject
 
-- (NSString *)getMethodNameInBase:(BOOL *)isCMDWrong;
+- (TestCMDResult *)onlySuper:(TestCMDResult *)result;
 
-- (NSString *)getMethodNameInBoth:(BOOL *)isCMDWrong;
+- (TestCMDResult *)inBoth:(TestCMDResult *)result;
 
 @end
 
-@interface TestCMDModel : TestCMDBaseModel
+@interface TestCMDModel : TestCMDSuperModel
 
-- (NSString *)getMethodNameInSubclass:(BOOL *)isCMDWrong;
+- (TestCMDResult *)onlySelf:(TestCMDResult *)result;
 
 @end
 
 @interface TestCMDModel (Swizzling)
 
-- (NSString *)_getMethodNameInSubclass:(BOOL *)isCMDWrong;
+- (TestCMDResult *)_onlySelf:(TestCMDResult *)result;
 
-- (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong;
+- (TestCMDResult *)_onlySuper:(TestCMDResult *)result;
 
-- (NSString *)_getMethodNameInBoth:(BOOL *)isCMDWrong;
+- (TestCMDResult *)_inBoth:(TestCMDResult *)result;
 
 @end
 

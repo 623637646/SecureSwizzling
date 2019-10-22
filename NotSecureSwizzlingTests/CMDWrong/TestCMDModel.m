@@ -9,47 +9,39 @@
 #import "TestCMDModel.h"
 #import "NotSecureSwizzlingTests-Swift.h"
 
-@implementation TestCMDBaseModel
+@implementation TestCMDSuperModel
 
-- (NSString *)getMethodNameInBase:(BOOL *)isCMDWrong
+- (TestCMDResult *)onlySuper:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    if (isCMDWrong) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBase:"];
-    }
-    return @"getMethodNameInBase:";
+    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySuper:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
+    return result;
 }
 
-- (NSString *)getMethodNameInBoth:(BOOL *)isCMDWrong
+- (TestCMDResult *)inBoth:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    if (isCMDWrong) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBoth:"];
-    }
-    return @"getMethodNameInBoth:";
+    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
+    return result;
 }
 
 @end
 
 @implementation TestCMDModel
 
-- (NSString *)getMethodNameInSubclass:(BOOL *)isCMDWrong
+- (TestCMDResult *)onlySelf:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    if (isCMDWrong) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInSubclass:"];
-    }
-    return @"getMethodNameInSubclass:";
+    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySelf:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
+    return result;
 }
 
-- (NSString *)getMethodNameInBoth:(BOOL *)isCMDWrong
+- (TestCMDResult *)inBoth:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    NSString *superResult = [super getMethodNameInBoth:isCMDWrong];
-    if (isCMDWrong && *isCMDWrong == NO) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"getMethodNameInBoth:"];
-    }
-    return [superResult stringByAppendingString:@"getMethodNameInBoth:"];
+    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
+    [super inBoth:result];
+    return result;
 }
 
 @end
@@ -57,34 +49,28 @@
 
 @implementation TestCMDModel (Swizzling)
 
-- (NSString *)_getMethodNameInSubclass:(BOOL *)isCMDWrong
+- (TestCMDResult *)_onlySelf:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    NSString *originalResult = [self _getMethodNameInSubclass:isCMDWrong];
-    if (isCMDWrong && *isCMDWrong == NO) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInSubclass:"];
-    }
-    return [originalResult stringByAppendingString:@"_getMethodNameInSubclass:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_onlySelf:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    [self _onlySelf:result];
+    return result;
 }
 
-- (NSString *)_getMethodNameInBase:(BOOL *)isCMDWrong
+- (TestCMDResult *)_onlySuper:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    NSString *originalResult = [self _getMethodNameInBase:isCMDWrong];
-    if (isCMDWrong && *isCMDWrong == NO) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBase:"];
-    }
-    return [originalResult stringByAppendingString:@"_getMethodNameInBase:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_onlySuper:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    [self _onlySuper:result];
+    return result;
 }
 
-- (NSString *)_getMethodNameInBoth:(BOOL *)isCMDWrong
+- (TestCMDResult *)_inBoth:(TestCMDResult *)result
 {
-    assert(isCMDWrong != NULL);
-    NSString *originalResult = [self _getMethodNameInBoth:isCMDWrong];
-    if (isCMDWrong && *isCMDWrong == NO) {
-        *isCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_getMethodNameInBoth:"];
-    }
-    return [originalResult stringByAppendingString:@"_getMethodNameInBoth:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_inBoth:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    [self _inBoth:result];
+    return result;
 }
 
 @end

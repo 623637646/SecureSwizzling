@@ -9,91 +9,91 @@
 import XCTest
 
 class CMDTests: XCTestCase {
+    
+    // only super method + no-swizzling
+    func test_onlySuper_noSwizzling() {
+        let obj = TestCMDModel()
+        let result = TestCMDResult()
+        obj.onlySuper(result)
+        
+        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.superMethod])
+    }
 
-    // normal method + no-swizzling
-    func testNormalMethodWithoutSwizzling() {
+    // only self method + no-swizzling
+    func test_onlySelf_noSwizzling() {
         let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        
-        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:")
-        XCTAssert(isCMDWrong.boolValue == false)
-        
-        // Infinite loop
-//        XCTAssert(obj._getMethodName(inSubclass: &isCMDWrong) == "_getMethodNameInSubclass:")
-//        XCTAssert(isCMDWrong.boolValue == false)
+        let result = TestCMDResult()
+        obj.onlySelf(result)
+
+        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.selfMethod])
+    }
+
+    // in both method + no-swizzling
+    func test_inBoth_noSwizzling() {
+        let obj = TestCMDModel()
+        let result = TestCMDResult()
+        obj.inBoth(result)
+
+        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.selfMethod, .superMethod])
     }
     
-    // inherited method + no-swizzling
-    func testInheritedMethodWithoutSwizzling() {
-        let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        
-        XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == false)
-        
-        // Infinite loop
-//        XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "_getMethodNameInBase:")
-//        XCTAssert(isCMDWrong.boolValue == false)
-    }
-    
-    // override method + no-swizzling
-    func testOverrideMethodWithoutSwizzling() {
-        let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        
-        XCTAssert(obj.getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:getMethodNameInBoth:")
-        XCTAssert(isCMDWrong.boolValue == false)
-        
-        // Infinite loop
-//        XCTAssert(obj._getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:_getMethodNameInBoth:")
-//        XCTAssert(isCMDWrong.boolValue == false)
-    }
-    
-    // normal method + unsafe swizzling
-    func testNormalMethodWithSwizzledCMDNotSecure() {
+    // only super method + swizzling
+    func test_onlySuper_swizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.getMethodName(inSubclass:)),
-                                       swizzledSelector: #selector(TestCMDModel._getMethodName(inSubclass:))) == true)
+                                       originalSel: #selector(TestCMDModel.onlySuper(_:)),
+                                       swizzledSelector: #selector(TestCMDModel._onlySuper(_:))) == true)
         
         let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        XCTAssert(obj.getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:_getMethodNameInSubclass:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        let result = TestCMDResult()
+        obj.onlySuper(result)
         
-        XCTAssert(obj._getMethodName(inSubclass: &isCMDWrong) == "getMethodNameInSubclass:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
-    // inherited method + unsafe swizzling
-    func testInheritedMethodWithSwizzledCMDNotSecure() {
+    // only self method + swizzling
+    func test_onlySelf_swizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.getMethodName(inBase:)),
-                                       swizzledSelector: #selector(TestCMDModel._getMethodName(inBase:))) == true)
+                                       originalSel: #selector(TestCMDModel.onlySelf(_:)),
+                                       swizzledSelector: #selector(TestCMDModel._onlySelf(_:))) == true)
         
         let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        XCTAssert(obj.getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:_getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        let result = TestCMDResult()
+        obj.onlySelf(result)
         
-        XCTAssert(obj._getMethodName(inBase: &isCMDWrong) == "getMethodNameInBase:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
     }
     
-    // override method + unsafe swizzling
-    func testOverrideMethodWithSwizzledCMDNotSecure() {
+    // in both method + swizzling
+    func test_inBoth_swizzling() {
         XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.getMethodName(inBoth:)),
-                                       swizzledSelector: #selector(TestCMDModel._getMethodName(inBoth:))) == true)
-        
+                                       originalSel: #selector(TestCMDModel.inBoth(_:)),
+                                       swizzledSelector: #selector(TestCMDModel._(inBoth:))) == true)
         
         let obj = TestCMDModel()
-        var isCMDWrong: ObjCBool = false
-        XCTAssert(obj.getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:getMethodNameInBoth:_getMethodNameInBoth:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        let result = TestCMDResult()
+        obj.inBoth(result)
         
-        XCTAssert(obj._getMethodName(inBoth: &isCMDWrong) == "getMethodNameInBoth:getMethodNameInBoth:")
-        XCTAssert(isCMDWrong.boolValue == true) // MARK: It's wrong here
+        XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
     }
+
     
 //    func testSwizzledCMDSecure() {
 //        XCTAssert(swizzle_CMDSecure(class: TestCMDModel.self,

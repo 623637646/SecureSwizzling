@@ -14,6 +14,7 @@ class TestCMDResult: NSObject {
     @objc enum Executed: Int {
         case superMethod = 0
         case selfMethod = 1
+        case swizzledMethod = 2
     }
     
     var executedMethods: [Executed] = []
@@ -31,7 +32,9 @@ class TestCMDResult: NSObject {
         }
     }
     
-    var isCMDWrong: Bool = false
+    var isSuperCMDWrong: Bool = false
+    var isSelfCMDWrong: Bool = false
+    var isSwizzledCMDWrong: Bool = false
     
     override init() {
         super.init()
