@@ -26,14 +26,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface TestCMDModel (Swizzling)
-
-- (TestCMDResult *)_onlySelf:(TestCMDResult *)result;
-
-- (TestCMDResult *)_onlySuper:(TestCMDResult *)result;
-
-- (TestCMDResult *)_inBoth:(TestCMDResult *)result;
-
-@end
-
 NS_ASSUME_NONNULL_END

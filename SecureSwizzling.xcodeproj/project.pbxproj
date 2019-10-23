@@ -16,9 +16,10 @@
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
 		2A7089B123599F5C00071FC3 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B023599F5C00071FC3 /* Animal.swift */; };
 		2A7089B323599F6F00071FC3 /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B223599F6F00071FC3 /* Dog.swift */; };
+		2AE1988023605E8A0073B785 /* TestCMDModel+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */; };
 		2AE27858235EE15F00B81C26 /* Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE27857235EE15F00B81C26 /* Swizzling.m */; };
 		2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062C235DAB850007F0DE /* CMDTests.swift */; };
-		2AF4062F235DABAA0007F0DE /* Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062E235DABAA0007F0DE /* Swizzling.swift */; };
+		2AF4062F235DABAA0007F0DE /* CMDSwizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062E235DABAA0007F0DE /* CMDSwizzling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +55,12 @@
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A7089B023599F5C00071FC3 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		2A7089B223599F6F00071FC3 /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		2AE1987E23605E8A0073B785 /* TestCMDModel+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestCMDModel+Swizzling.h"; sourceTree = "<group>"; };
+		2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TestCMDModel+Swizzling.m"; sourceTree = "<group>"; };
 		2AE27856235EE15F00B81C26 /* Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swizzling.h; sourceTree = "<group>"; };
 		2AE27857235EE15F00B81C26 /* Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Swizzling.m; sourceTree = "<group>"; };
 		2AF4062C235DAB850007F0DE /* CMDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDTests.swift; sourceTree = "<group>"; };
-		2AF4062E235DABAA0007F0DE /* Swizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzling.swift; sourceTree = "<group>"; };
+		2AF4062E235DABAA0007F0DE /* CMDSwizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDSwizzling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,28 +90,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A2E4A81235DAACA0029425B /* Utilities */ = {
+		2A2E4A81235DAACA0029425B /* Others */ = {
 			isa = PBXGroup;
 			children = (
 				2A7089B023599F5C00071FC3 /* Animal.swift */,
 				2A7089B223599F6F00071FC3 /* Dog.swift */,
-				2AF4062E235DABAA0007F0DE /* Swizzling.swift */,
 				2AE27856235EE15F00B81C26 /* Swizzling.h */,
 				2AE27857235EE15F00B81C26 /* Swizzling.m */,
 				2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */,
 			);
-			path = Utilities;
+			path = Others;
 			sourceTree = "<group>";
 		};
-		2A59C546235EAB0200518B6B /* CMDWrong */ = {
+		2A59C546235EAB0200518B6B /* CMD */ = {
 			isa = PBXGroup;
 			children = (
-				2A50D04C235DA87200D7D800 /* TestCMDModel.h */,
-				2A50D04D235DA87200D7D800 /* TestCMDModel.m */,
-				2A59C544235EA5BC00518B6B /* TestCMDResult.swift */,
 				2AF4062C235DAB850007F0DE /* CMDTests.swift */,
+				2AE1987C23605D4D0073B785 /* Models */,
+				2AE1987D23605D5D0073B785 /* NotSecureSwizzling */,
 			);
-			path = CMDWrong;
+			path = CMD;
 			sourceTree = "<group>";
 		};
 		2A70897D2359756F00071FC3 = {
@@ -152,12 +153,32 @@
 		2A7089A62359764F00071FC3 /* NotSecureSwizzlingTests */ = {
 			isa = PBXGroup;
 			children = (
-				2A59C546235EAB0200518B6B /* CMDWrong */,
-				2A2E4A81235DAACA0029425B /* Utilities */,
+				2A59C546235EAB0200518B6B /* CMD */,
+				2A2E4A81235DAACA0029425B /* Others */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
 			);
 			path = NotSecureSwizzlingTests;
+			sourceTree = "<group>";
+		};
+		2AE1987C23605D4D0073B785 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A50D04C235DA87200D7D800 /* TestCMDModel.h */,
+				2A50D04D235DA87200D7D800 /* TestCMDModel.m */,
+				2A59C544235EA5BC00518B6B /* TestCMDResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2AE1987D23605D5D0073B785 /* NotSecureSwizzling */ = {
+			isa = PBXGroup;
+			children = (
+				2AE1987E23605E8A0073B785 /* TestCMDModel+Swizzling.h */,
+				2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */,
+				2AF4062E235DABAA0007F0DE /* CMDSwizzling.swift */,
+			);
+			path = NotSecureSwizzling;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,11 +336,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */,
+				2AE1988023605E8A0073B785 /* TestCMDModel+Swizzling.m in Sources */,
 				2A7089B323599F6F00071FC3 /* Dog.swift in Sources */,
 				2A7089B123599F5C00071FC3 /* Animal.swift in Sources */,
 				2A50D04E235DA87200D7D800 /* TestCMDModel.m in Sources */,
 				2A59C545235EA5BC00518B6B /* TestCMDResult.swift in Sources */,
-				2AF4062F235DABAA0007F0DE /* Swizzling.swift in Sources */,
+				2AF4062F235DABAA0007F0DE /* CMDSwizzling.swift in Sources */,
 				2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */,
 				2AE27858235EE15F00B81C26 /* Swizzling.m in Sources */,
 			);
