@@ -52,9 +52,7 @@ class CMDTests: XCTestCase {
     
     // only super method + unsecure swizzling
     func test_onlySuper_unsecureSwizzling() {
-        XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.onlySuper(_:)),
-                                       swizzledSelector: #selector(TestCMDModel._onlySuper(_:))) == true)
+        XCTAssert(swizzle_onlySuper_unsecureSwizzling() == true)
         
         let obj = TestCMDModel()
         let result = TestCMDResult()
@@ -68,9 +66,7 @@ class CMDTests: XCTestCase {
     
     // only self method + unsecure swizzling
     func test_onlySelf_unsecureSwizzling() {
-        XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.onlySelf(_:)),
-                                       swizzledSelector: #selector(TestCMDModel._onlySelf(_:))) == true)
+        XCTAssert(swizzle_onlySelf_unsecureSwizzling() == true)
         
         let obj = TestCMDModel()
         let result = TestCMDResult()
@@ -84,9 +80,7 @@ class CMDTests: XCTestCase {
     
     // in both method + unsecure swizzling
     func test_inBoth_unsecureSwizzling() {
-        XCTAssert(swizzle_CMDNotSecure(class: TestCMDModel.self,
-                                       originalSel: #selector(TestCMDModel.inBoth(_:)),
-                                       swizzledSelector: #selector(TestCMDModel._(inBoth:))) == true)
+        XCTAssert(swizzle_inBoth_unsecureSwizzling() == true)
         
         let obj = TestCMDModel()
         let result = TestCMDResult()

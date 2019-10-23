@@ -14,15 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestCMDSuperModel : NSObject
 
-- (TestCMDResult *)onlySuper:(TestCMDResult *)result;
+- (void)onlySuper:(TestCMDResult *)result;
 
-- (TestCMDResult *)inBoth:(TestCMDResult *)result;
+- (void)inBoth:(TestCMDResult *)result;
 
 @end
 
 @interface TestCMDModel : TestCMDSuperModel
 
-- (TestCMDResult *)onlySelf:(TestCMDResult *)result;
+- (void)onlySelf:(TestCMDResult *)result;
 
 @end
 

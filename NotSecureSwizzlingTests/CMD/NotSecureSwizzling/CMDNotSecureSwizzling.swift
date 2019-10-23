@@ -8,7 +8,25 @@
 
 import Foundation
 
-func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
+func swizzle_onlySuper_unsecureSwizzling() -> Bool {
+    swizzle_CMDNotSecure(class: TestCMDModel.self,
+                         originalSel: #selector(TestCMDModel.onlySuper(_:)),
+                         swizzledSelector: #selector(TestCMDModel._onlySuper(_:)))
+}
+
+func swizzle_onlySelf_unsecureSwizzling() -> Bool {
+    swizzle_CMDNotSecure(class: TestCMDModel.self,
+                         originalSel: #selector(TestCMDModel.onlySelf(_:)),
+                         swizzledSelector: #selector(TestCMDModel._onlySelf(_:)))
+}
+
+func swizzle_inBoth_unsecureSwizzling() -> Bool {
+    swizzle_CMDNotSecure(class: TestCMDModel.self,
+                         originalSel: #selector(TestCMDModel.inBoth(_:)),
+                         swizzledSelector: #selector(TestCMDModel._(inBoth:)))
+}
+
+private func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
     // prepare
     guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
         return false
