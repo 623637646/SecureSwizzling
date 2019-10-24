@@ -31,7 +31,7 @@ func swizzle_inBoth_secureSwizzling() -> Bool {
 
 // MARK: private
 
-private typealias MethodType = @convention(block) (AnyObject, Selector, TestCMDResult) -> Void
+private typealias MethodType = @convention(c) (AnyObject, Selector, TestCMDResult) -> Void
 
 private var methodOriginal: UnsafeMutablePointer<MethodType?> = UnsafeMutablePointer.allocate(capacity: 1)
 
