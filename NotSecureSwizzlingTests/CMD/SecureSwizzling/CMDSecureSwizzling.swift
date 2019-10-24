@@ -8,8 +8,10 @@
 
 import Foundation
 
+// MARK: public
+
 func swizzle_onlySuper_secureSwizzling() -> Bool {
-    let ptr = methodOriginal.withMemoryRebound(to: IMP.self, capacity: 1, { (ptr) -> UnsafeMutablePointer<IMP> in
+    let ptr = methodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1, { (ptr) -> UnsafeMutablePointer<IMP?> in
         return ptr
     })
     
@@ -27,16 +29,20 @@ func swizzle_inBoth_secureSwizzling() -> Bool {
     return false
 }
 
-private var methodOriginal: UnsafeMutablePointer<@convention(block) (AnyObject, Selector, TestCMDResult) -> Void> = UnsafeMutablePointer.allocate(capacity: 1)
+// MARK: private
 
-private var methodSwizzled: @convention(block) (AnyObject, Selector, TestCMDResult) -> Void = {
+private typealias MethodType = @convention(block) (AnyObject, Selector, TestCMDResult) -> Void
+
+private var methodOriginal: UnsafeMutablePointer<MethodType?> = UnsafeMutablePointer.allocate(capacity: 1)
+
+private var methodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestCMDResult) in
     result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_onlySelf:"
     result.executedMethods.append(.swizzledMethod)
-    methodOriginal.pointee(`self`, _cmd, result)
+    methodOriginal.pointee?(`self`, _cmd, result)
 }
 
-private func class_swizzleMethodAndStore(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP>) -> Bool {
+private func class_swizzleMethodAndStore(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
     var imp: IMP? = nil
     guard let originalMethod = class_getInstanceMethod(theClass, original) else {
         return false
