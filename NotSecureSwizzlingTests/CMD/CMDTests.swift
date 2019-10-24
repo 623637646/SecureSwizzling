@@ -96,8 +96,7 @@ class CMDTests: XCTestCase {
     
     // only super method + secure swizzling
     func test_onlySuper_secureSwizzling() {
-        
-//        doit()
+        XCTAssert(swizzle_onlySuper_secureSwizzling() == true)
         
         let obj = TestCMDModel()
         let result = TestCMDResult()
