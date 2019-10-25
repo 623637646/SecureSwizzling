@@ -79,16 +79,15 @@ func swizzle_inBoth_secureSwizzling() -> Bool {
 // MARK: utilities
 
 private func class_swizzleMethodAndStore(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
-    var imp: IMP? = nil
     guard let originalMethod = class_getInstanceMethod(theClass, original) else {
         return false
     }
     let originalTypeEncoding = method_getTypeEncoding(originalMethod)
-    imp = class_replaceMethod(theClass, original, replacement, originalTypeEncoding)
-    if imp == nil {
-        imp = method_getImplementation(originalMethod)
+    var originalIMP = class_replaceMethod(theClass, original, replacement, originalTypeEncoding)
+    if originalIMP == nil {
+        originalIMP = method_getImplementation(originalMethod)
     }
-    guard let impNotNil = imp else {
+    guard let impNotNil = originalIMP else {
         return false
     }
     store.pointee = impNotNil
