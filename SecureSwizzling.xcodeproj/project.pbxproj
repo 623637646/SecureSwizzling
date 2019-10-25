@@ -12,13 +12,9 @@
 		2A7089912359757000071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
 		2A7089962359757000071FC3 /* SecureSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089952359757000071FC3 /* SecureSwizzlingTests.swift */; };
 		2A7089982359757000071FC3 /* SecureSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A70898A2359756F00071FC3 /* SecureSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */; };
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
-		2A7089B123599F5C00071FC3 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B023599F5C00071FC3 /* Animal.swift */; };
-		2A7089B323599F6F00071FC3 /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089B223599F6F00071FC3 /* Dog.swift */; };
 		2AE1988023605E8A0073B785 /* TestCMDModel+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */; };
-		2AE19883236060050073B785 /* CMDSecureSwizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE19882236060050073B785 /* CMDSecureSwizzling.swift */; };
-		2AE27858235EE15F00B81C26 /* Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE27857235EE15F00B81C26 /* Swizzling.m */; };
+		2AE19883236060050073B785 /* SecureSwizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE19882236060050073B785 /* SecureSwizzling.swift */; };
 		2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062C235DAB850007F0DE /* CMDTests.swift */; };
 		2AF4062F235DABAA0007F0DE /* CMDNotSecureSwizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062E235DABAA0007F0DE /* CMDNotSecureSwizzling.swift */; };
 /* End PBXBuildFile section */
@@ -52,15 +48,10 @@
 		2A7089952359757000071FC3 /* SecureSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureSwizzlingTests.swift; sourceTree = "<group>"; };
 		2A7089972359757000071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A7089A52359764F00071FC3 /* NotSecureSwizzlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotSecureSwizzlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSecureSwizzlingTests.swift; sourceTree = "<group>"; };
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A7089B023599F5C00071FC3 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
-		2A7089B223599F6F00071FC3 /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
 		2AE1987E23605E8A0073B785 /* TestCMDModel+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestCMDModel+Swizzling.h"; sourceTree = "<group>"; };
 		2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TestCMDModel+Swizzling.m"; sourceTree = "<group>"; };
-		2AE19882236060050073B785 /* CMDSecureSwizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDSecureSwizzling.swift; sourceTree = "<group>"; };
-		2AE27856235EE15F00B81C26 /* Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swizzling.h; sourceTree = "<group>"; };
-		2AE27857235EE15F00B81C26 /* Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Swizzling.m; sourceTree = "<group>"; };
+		2AE19882236060050073B785 /* SecureSwizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureSwizzling.swift; sourceTree = "<group>"; };
 		2AF4062C235DAB850007F0DE /* CMDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDTests.swift; sourceTree = "<group>"; };
 		2AF4062E235DABAA0007F0DE /* CMDNotSecureSwizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDNotSecureSwizzling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,29 +83,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A2E4A81235DAACA0029425B /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				2A7089B023599F5C00071FC3 /* Animal.swift */,
-				2A7089B223599F6F00071FC3 /* Dog.swift */,
-				2AE27856235EE15F00B81C26 /* Swizzling.h */,
-				2AE27857235EE15F00B81C26 /* Swizzling.m */,
-				2A7089A72359764F00071FC3 /* NotSecureSwizzlingTests.swift */,
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		2A59C546235EAB0200518B6B /* CMD */ = {
-			isa = PBXGroup;
-			children = (
-				2AF4062C235DAB850007F0DE /* CMDTests.swift */,
-				2AE1987C23605D4D0073B785 /* Models */,
-				2AE1987D23605D5D0073B785 /* NotSecureSwizzling */,
-				2AE1988123605FC90073B785 /* SecureSwizzling */,
-			);
-			path = CMD;
-			sourceTree = "<group>";
-		};
 		2A70897D2359756F00071FC3 = {
 			isa = PBXGroup;
 			children = (
@@ -156,8 +124,10 @@
 		2A7089A62359764F00071FC3 /* NotSecureSwizzlingTests */ = {
 			isa = PBXGroup;
 			children = (
-				2A59C546235EAB0200518B6B /* CMD */,
-				2A2E4A81235DAACA0029425B /* Others */,
+				2AF4062C235DAB850007F0DE /* CMDTests.swift */,
+				2AE1987C23605D4D0073B785 /* Models */,
+				2AE1987D23605D5D0073B785 /* CMDNotSecureSwizzling */,
+				2AE1988123605FC90073B785 /* SecureSwizzling */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
 			);
@@ -174,20 +144,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		2AE1987D23605D5D0073B785 /* NotSecureSwizzling */ = {
+		2AE1987D23605D5D0073B785 /* CMDNotSecureSwizzling */ = {
 			isa = PBXGroup;
 			children = (
 				2AE1987E23605E8A0073B785 /* TestCMDModel+Swizzling.h */,
 				2AE1987F23605E8A0073B785 /* TestCMDModel+Swizzling.m */,
 				2AF4062E235DABAA0007F0DE /* CMDNotSecureSwizzling.swift */,
 			);
-			path = NotSecureSwizzling;
+			path = CMDNotSecureSwizzling;
 			sourceTree = "<group>";
 		};
 		2AE1988123605FC90073B785 /* SecureSwizzling */ = {
 			isa = PBXGroup;
 			children = (
-				2AE19882236060050073B785 /* CMDSecureSwizzling.swift */,
+				2AE19882236060050073B785 /* SecureSwizzling.swift */,
 			);
 			path = SecureSwizzling;
 			sourceTree = "<group>";
@@ -348,14 +318,10 @@
 			files = (
 				2AF4062D235DAB850007F0DE /* CMDTests.swift in Sources */,
 				2AE1988023605E8A0073B785 /* TestCMDModel+Swizzling.m in Sources */,
-				2A7089B323599F6F00071FC3 /* Dog.swift in Sources */,
-				2A7089B123599F5C00071FC3 /* Animal.swift in Sources */,
 				2A50D04E235DA87200D7D800 /* TestCMDModel.m in Sources */,
-				2AE19883236060050073B785 /* CMDSecureSwizzling.swift in Sources */,
+				2AE19883236060050073B785 /* SecureSwizzling.swift in Sources */,
 				2A59C545235EA5BC00518B6B /* TestCMDResult.swift in Sources */,
 				2AF4062F235DABAA0007F0DE /* CMDNotSecureSwizzling.swift in Sources */,
-				2A7089A82359764F00071FC3 /* NotSecureSwizzlingTests.swift in Sources */,
-				2AE27858235EE15F00B81C26 /* Swizzling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
