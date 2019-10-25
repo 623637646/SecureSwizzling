@@ -10,6 +10,37 @@ import XCTest
 
 class SuperNotSecureTests: XCTestCase {
 
+    // only super method + unsecure swizzling
+    func test_onlySuper() {
+        XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
+        
+        let obj = TestModel()
+        let result = TestResultModel()
+        obj.onlySuper(result)
+        
+        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+    }
     
+    // only self method + unsecure swizzling
+    func test_onlySelf() {
+        XCTAssert(swizzle_onlySelf_super_unsecureSwizzling() == true)
+        
+        let obj = TestModel()
+        let result = TestResultModel()
+        obj.onlySelf(result)
+        
+        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
+    }
+    
+    // in both method + unsecure swizzling
+    func test_inBoth() {
+        XCTAssert(swizzle_inBoth_super_unsecureSwizzling() == true)
+        
+        let obj = TestModel()
+        let result = TestResultModel()
+        obj.inBoth(result)
+        
+        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
+    }
 
 }
