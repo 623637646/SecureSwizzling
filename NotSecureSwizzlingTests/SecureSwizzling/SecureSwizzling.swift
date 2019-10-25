@@ -12,7 +12,12 @@ private typealias MethodType = @convention(c) (AnyObject, Selector, TestResultMo
 
 // MARK: only super
 
-private var onlySuperMethodOriginal: UnsafeMutablePointer<MethodType?> = UnsafeMutablePointer.allocate(capacity: 1)
+private var onlySuperMethodOriginal: UnsafeMutablePointer<MethodType?> = {
+    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
+    pointer.initialize(to: nil)
+    return pointer
+}()
+
 
 private let onlySuperMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResultModel) in
