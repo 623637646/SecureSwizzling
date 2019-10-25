@@ -11,7 +11,7 @@ import XCTest
 class NoSwizzlingTests: XCTestCase {
     
     // only super method + no-swizzling
-    func test_onlySuper_noSwizzling() {
+    func test_onlySuper() {
         let obj = TestModel()
         let result = TestResultModel()
         obj.onlySuper(result)
@@ -23,7 +23,7 @@ class NoSwizzlingTests: XCTestCase {
     }
 
     // only self method + no-swizzling
-    func test_onlySelf_noSwizzling() {
+    func test_onlySelf() {
         let obj = TestModel()
         let result = TestResultModel()
         obj.onlySelf(result)
@@ -35,7 +35,7 @@ class NoSwizzlingTests: XCTestCase {
     }
 
     // in both method + no-swizzling
-    func test_inBoth_noSwizzling() {
+    func test_inBoth() {
         let obj = TestModel()
         let result = TestResultModel()
         obj.inBoth(result)

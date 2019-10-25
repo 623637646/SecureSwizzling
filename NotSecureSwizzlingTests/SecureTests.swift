@@ -1,5 +1,5 @@
 //
-//  CMDSecureTests.swift
+//  SecureTests.swift
 //  NotSecureSwizzlingTests
 //
 //  Created by Yanni Wang on 25/10/19.
@@ -8,10 +8,10 @@
 
 import XCTest
 
-class CMDSecureTests: XCTestCase {
+class SecureTests: XCTestCase {
     
     // only super method + secure swizzling
-    func test_onlySuper_secureSwizzling() {
+    func test_onlySuper() {
         XCTAssert(swizzle_onlySuper_secureSwizzling() == true)
         
         let obj = TestModel()
@@ -25,7 +25,7 @@ class CMDSecureTests: XCTestCase {
     }
     
     // only self method + secure swizzling
-    func test_onlySelf_secureSwizzling() {
+    func test_onlySelf() {
         XCTAssert(swizzle_onlySelf_secureSwizzling() == true)
         
         let obj = TestModel()
@@ -39,7 +39,7 @@ class CMDSecureTests: XCTestCase {
     }
     
     // in both method + secure swizzling
-    func test_inBoth_secureSwizzling() {
+    func test_inBoth() {
         XCTAssert(swizzle_inBoth_secureSwizzling() == true)
         
         let obj = TestModel()

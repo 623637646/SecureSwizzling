@@ -14,7 +14,8 @@
 		2A7089982359757000071FC3 /* SecureSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A70898A2359756F00071FC3 /* SecureSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
 		2ADE11372362B00100DA6776 /* NoSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE11362362B00100DA6776 /* NoSwizzlingTests.swift */; };
-		2ADE11392362B06900DA6776 /* CMDSecureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE11382362B06900DA6776 /* CMDSecureTests.swift */; };
+		2ADE11392362B06900DA6776 /* SecureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE11382362B06900DA6776 /* SecureTests.swift */; };
+		2ADE113C2362B13800DA6776 /* SuperNotSecureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE113B2362B13800DA6776 /* SuperNotSecureTests.swift */; };
 		2AE1988023605E8A0073B785 /* TestModel+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */; };
 		2AE19883236060050073B785 /* SecureSwizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE19882236060050073B785 /* SecureSwizzling.swift */; };
 		2AF4062D235DAB850007F0DE /* CMDNotSecureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062C235DAB850007F0DE /* CMDNotSecureTests.swift */; };
@@ -52,7 +53,8 @@
 		2A7089A52359764F00071FC3 /* NotSecureSwizzlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotSecureSwizzlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ADE11362362B00100DA6776 /* NoSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSwizzlingTests.swift; sourceTree = "<group>"; };
-		2ADE11382362B06900DA6776 /* CMDSecureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDSecureTests.swift; sourceTree = "<group>"; };
+		2ADE11382362B06900DA6776 /* SecureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTests.swift; sourceTree = "<group>"; };
+		2ADE113B2362B13800DA6776 /* SuperNotSecureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNotSecureTests.swift; sourceTree = "<group>"; };
 		2AE1987E23605E8A0073B785 /* TestModel+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestModel+Swizzling.h"; sourceTree = "<group>"; };
 		2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TestModel+Swizzling.m"; sourceTree = "<group>"; };
 		2AE19882236060050073B785 /* SecureSwizzling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureSwizzling.swift; sourceTree = "<group>"; };
@@ -129,15 +131,24 @@
 			isa = PBXGroup;
 			children = (
 				2ADE11362362B00100DA6776 /* NoSwizzlingTests.swift */,
+				2ADE113B2362B13800DA6776 /* SuperNotSecureTests.swift */,
 				2AF4062C235DAB850007F0DE /* CMDNotSecureTests.swift */,
-				2ADE11382362B06900DA6776 /* CMDSecureTests.swift */,
+				2ADE11382362B06900DA6776 /* SecureTests.swift */,
 				2AE1987C23605D4D0073B785 /* Models */,
+				2ADE113A2362B0DD00DA6776 /* SuperNotSecureSwizzling */,
 				2AE1987D23605D5D0073B785 /* CMDNotSecureSwizzling */,
 				2AE1988123605FC90073B785 /* SecureSwizzling */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
 			);
 			path = NotSecureSwizzlingTests;
+			sourceTree = "<group>";
+		};
+		2ADE113A2362B0DD00DA6776 /* SuperNotSecureSwizzling */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SuperNotSecureSwizzling;
 			sourceTree = "<group>";
 		};
 		2AE1987C23605D4D0073B785 /* Models */ = {
@@ -326,8 +337,9 @@
 				2AE1988023605E8A0073B785 /* TestModel+Swizzling.m in Sources */,
 				2ADE11372362B00100DA6776 /* NoSwizzlingTests.swift in Sources */,
 				2A50D04E235DA87200D7D800 /* TestModel.m in Sources */,
+				2ADE113C2362B13800DA6776 /* SuperNotSecureTests.swift in Sources */,
 				2AE19883236060050073B785 /* SecureSwizzling.swift in Sources */,
-				2ADE11392362B06900DA6776 /* CMDSecureTests.swift in Sources */,
+				2ADE11392362B06900DA6776 /* SecureTests.swift in Sources */,
 				2A59C545235EA5BC00518B6B /* TestResultModel.swift in Sources */,
 				2AF4062F235DABAA0007F0DE /* CMDNotSecureSwizzling.swift in Sources */,
 			);

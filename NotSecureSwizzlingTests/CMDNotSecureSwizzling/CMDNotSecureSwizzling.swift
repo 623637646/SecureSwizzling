@@ -8,19 +8,19 @@
 
 import Foundation
 
-func swizzle_onlySuper_unsecureSwizzling() -> Bool {
+func swizzle_onlySuper_cmd_unsecureSwizzling() -> Bool {
     swizzle_CMDNotSecure(class: TestModel.self,
                          originalSel: #selector(TestModel.onlySuper(_:)),
                          swizzledSelector: #selector(TestModel._onlySuper(_:)))
 }
 
-func swizzle_onlySelf_unsecureSwizzling() -> Bool {
+func swizzle_onlySelf_cmd_unsecureSwizzling() -> Bool {
     swizzle_CMDNotSecure(class: TestModel.self,
                          originalSel: #selector(TestModel.onlySelf(_:)),
                          swizzledSelector: #selector(TestModel._onlySelf(_:)))
 }
 
-func swizzle_inBoth_unsecureSwizzling() -> Bool {
+func swizzle_inBoth_cmd_unsecureSwizzling() -> Bool {
     swizzle_CMDNotSecure(class: TestModel.self,
                          originalSel: #selector(TestModel.inBoth(_:)),
                          swizzledSelector: #selector(TestModel._(inBoth:)))
