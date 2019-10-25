@@ -39,7 +39,11 @@ func swizzle_onlySuper_secureSwizzling() -> Bool {
 
 // MARK: only self
 
-private var onlySelfMethodOriginal: UnsafeMutablePointer<MethodType?> = UnsafeMutablePointer.allocate(capacity: 1)
+private var onlySelfMethodOriginal: UnsafeMutablePointer<MethodType?> = {
+    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
+    pointer.initialize(to: nil)
+    return pointer
+}()
 
 private let onlySelfMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResultModel) in
@@ -61,7 +65,11 @@ func swizzle_onlySelf_secureSwizzling() -> Bool {
 
 // MARK: in both
 
-private var inBothMethodOriginal: UnsafeMutablePointer<MethodType?> = UnsafeMutablePointer.allocate(capacity: 1)
+private var inBothMethodOriginal: UnsafeMutablePointer<MethodType?> = {
+    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
+    pointer.initialize(to: nil)
+    return pointer
+}()
 
 private let inBothMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResultModel) in
