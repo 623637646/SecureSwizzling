@@ -1,5 +1,5 @@
 //
-//  TestCMDModel.h
+//  TestModel.h
 //  NotSecureSwizzlingTests
 //
 //  Created by Yanni Wang on 21/10/19.
@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class TestCMDResult;
+@class TestResultModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TestCMDSuperModel : NSObject
 
-- (void)onlySuper:(TestCMDResult *)result;
+- (void)onlySuper:(TestResultModel *)result;
 
-- (void)inBoth:(TestCMDResult *)result;
+- (void)inBoth:(TestResultModel *)result;
 
 @end
 
-@interface TestCMDModel : TestCMDSuperModel
+@interface TestModel : TestCMDSuperModel
 
-- (void)onlySelf:(TestCMDResult *)result;
+- (void)onlySelf:(TestResultModel *)result;
 
 @end
 

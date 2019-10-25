@@ -1,23 +1,23 @@
 //
-//  TestCMDModel.m
+//  TestModel.m
 //  NotSecureSwizzlingTests
 //
 //  Created by Yanni Wang on 21/10/19.
 //  Copyright © 2019 Yanni. All rights reserved.
 //
 
-#import "TestCMDModel.h"
+#import "TestModel.h"
 #import "NotSecureSwizzlingTests-Swift.h"
 
 @implementation TestCMDSuperModel
 
-- (void)onlySuper:(TestCMDResult *)result
+- (void)onlySuper:(TestResultModel *)result
 {
     result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySuper:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
 }
 
-- (void)inBoth:(TestCMDResult *)result
+- (void)inBoth:(TestResultModel *)result
 {
     result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
@@ -25,15 +25,15 @@
 
 @end
 
-@implementation TestCMDModel
+@implementation TestModel
 
-- (void)onlySelf:(TestCMDResult *)result
+- (void)onlySelf:(TestResultModel *)result
 {
     result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySelf:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
 }
 
-- (void)inBoth:(TestCMDResult *)result
+- (void)inBoth:(TestResultModel *)result
 {
     result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];

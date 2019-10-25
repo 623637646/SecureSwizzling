@@ -9,21 +9,21 @@
 import Foundation
 
 func swizzle_onlySuper_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestCMDModel.self,
-                         originalSel: #selector(TestCMDModel.onlySuper(_:)),
-                         swizzledSelector: #selector(TestCMDModel._onlySuper(_:)))
+    swizzle_CMDNotSecure(class: TestModel.self,
+                         originalSel: #selector(TestModel.onlySuper(_:)),
+                         swizzledSelector: #selector(TestModel._onlySuper(_:)))
 }
 
 func swizzle_onlySelf_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestCMDModel.self,
-                         originalSel: #selector(TestCMDModel.onlySelf(_:)),
-                         swizzledSelector: #selector(TestCMDModel._onlySelf(_:)))
+    swizzle_CMDNotSecure(class: TestModel.self,
+                         originalSel: #selector(TestModel.onlySelf(_:)),
+                         swizzledSelector: #selector(TestModel._onlySelf(_:)))
 }
 
 func swizzle_inBoth_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestCMDModel.self,
-                         originalSel: #selector(TestCMDModel.inBoth(_:)),
-                         swizzledSelector: #selector(TestCMDModel._(inBoth:)))
+    swizzle_CMDNotSecure(class: TestModel.self,
+                         originalSel: #selector(TestModel.inBoth(_:)),
+                         swizzledSelector: #selector(TestModel._(inBoth:)))
 }
 
 private func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
