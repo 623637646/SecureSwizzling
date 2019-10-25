@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TestCMDSuperModel : NSObject
+@interface TestSuperModel : NSObject
 
 - (void)onlySuper:(TestResultModel *)result;
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface TestModel : TestCMDSuperModel
+@interface TestModel : TestSuperModel
 
 - (void)onlySelf:(TestResultModel *)result;
 

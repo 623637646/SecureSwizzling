@@ -9,7 +9,7 @@
 #import "TestModel.h"
 #import "NotSecureSwizzlingTests-Swift.h"
 
-@implementation TestCMDSuperModel
+@implementation TestSuperModel
 
 - (void)onlySuper:(TestResultModel *)result
 {

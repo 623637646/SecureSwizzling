@@ -42,5 +42,15 @@ class SuperNotSecureTests: XCTestCase {
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
     }
+    
+    // tedt "super object" with "onlySuper" method
+    func test_superObject_onlySuper() {
+        XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
+        
+        let obj = TestSuperModel()
+        let result = TestResultModel()
+        XCTAssertNoThrow(obj.onlySuper(result))
+        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+    }
 
 }
