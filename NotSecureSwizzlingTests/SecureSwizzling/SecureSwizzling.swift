@@ -27,14 +27,12 @@ private let onlySuperMethodSwizzled: MethodType = {
 }
 
 func swizzle_onlySuper_secureSwizzling() -> Bool {
-    let ptr = onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1, { (ptr) -> UnsafeMutablePointer<IMP?> in
-        return ptr
-    })
-    
-    return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                       original: #selector(TestModel.onlySuper(_:)),
-                                       replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
-                                       store: ptr)
+    return onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
+        return class_swizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.onlySuper(_:)),
+                                           replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
+                                           store: pointer)
+    }
 }
 
 // MARK: only self
@@ -53,14 +51,12 @@ private let onlySelfMethodSwizzled: MethodType = {
 }
 
 func swizzle_onlySelf_secureSwizzling() -> Bool {
-    let ptr = onlySelfMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1, { (ptr) -> UnsafeMutablePointer<IMP?> in
-        return ptr
-    })
-    
-    return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                       original: #selector(TestModel.onlySelf(_:)),
-                                       replacement: unsafeBitCast(onlySelfMethodSwizzled, to: IMP.self),
-                                       store: ptr)
+    return onlySelfMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
+        return class_swizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.onlySelf(_:)),
+                                           replacement: unsafeBitCast(onlySelfMethodSwizzled, to: IMP.self),
+                                           store: pointer)
+    }
 }
 
 // MARK: in both
@@ -79,14 +75,12 @@ private let inBothMethodSwizzled: MethodType = {
 }
 
 func swizzle_inBoth_secureSwizzling() -> Bool {
-    let ptr = inBothMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1, { (ptr) -> UnsafeMutablePointer<IMP?> in
-        return ptr
-    })
-    
-    return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                       original: #selector(TestModel.inBoth(_:)),
-                                       replacement: unsafeBitCast(inBothMethodSwizzled, to: IMP.self),
-                                       store: ptr)
+    return inBothMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
+        return class_swizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.inBoth(_:)),
+                                           replacement: unsafeBitCast(inBothMethodSwizzled, to: IMP.self),
+                                           store: pointer)
+    }
 }
 
 // MARK: utilities
