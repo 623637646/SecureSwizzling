@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class TestResultModel;
+@class TestResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TestSuperModel : NSObject
 
-- (void)onlySuper:(TestResultModel *)result;
+- (void)onlySuper:(TestResult *)result;
 
-- (void)inBoth:(TestResultModel *)result;
+- (void)inBoth:(TestResult *)result;
 
 @end
 
 @interface TestModel : TestSuperModel
 
-- (void)onlySelf:(TestResultModel *)result;
+- (void)onlySelf:(TestResult *)result;
 
 @end
 

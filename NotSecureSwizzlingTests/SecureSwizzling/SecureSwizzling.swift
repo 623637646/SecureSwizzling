@@ -8,7 +8,7 @@
 
 import Foundation
 
-private typealias MethodType = @convention(c) (AnyObject, Selector, TestResultModel) -> Void
+private typealias MethodType = @convention(c) (AnyObject, Selector, TestResult) -> Void
 
 // MARK: only super
 
@@ -20,7 +20,7 @@ private var onlySuperMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 
 
 private let onlySuperMethodSwizzled: MethodType = {
-    (self: AnyObject, _cmd: Selector, result: TestResultModel) in
+    (self: AnyObject, _cmd: Selector, result: TestResult) in
     result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_onlySuper:"
     result.executedMethods.append(.swizzledMethod)
     onlySuperMethodOriginal.pointee?(`self`, _cmd, result)
@@ -44,7 +44,7 @@ private var onlySelfMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 }()
 
 private let onlySelfMethodSwizzled: MethodType = {
-    (self: AnyObject, _cmd: Selector, result: TestResultModel) in
+    (self: AnyObject, _cmd: Selector, result: TestResult) in
     result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_onlySelf:"
     result.executedMethods.append(.swizzledMethod)
     onlySelfMethodOriginal.pointee?(`self`, _cmd, result)
@@ -68,7 +68,7 @@ private var inBothMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 }()
 
 private let inBothMethodSwizzled: MethodType = {
-    (self: AnyObject, _cmd: Selector, result: TestResultModel) in
+    (self: AnyObject, _cmd: Selector, result: TestResult) in
     result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_inBoth:"
     result.executedMethods.append(.swizzledMethod)
     inBothMethodOriginal.pointee?(`self`, _cmd, result)

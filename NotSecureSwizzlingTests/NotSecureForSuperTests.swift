@@ -11,33 +11,33 @@ import XCTest
 class SuperNotSecureTests: XCTestCase {
 
     // only super method + unsecure swizzling
-    func test_onlySuper() {
+    func testSuperMethod() {
         XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.onlySuper(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
     // only self method + unsecure swizzling
-    func test_onlySelf() {
+    func testSelfMethod() {
         XCTAssert(swizzle_onlySelf_super_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.onlySelf(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
     }
     
     // in both method + unsecure swizzling
-    func test_inBoth() {
+    func testOverridedMethod() {
         XCTAssert(swizzle_inBoth_super_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.inBoth(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
@@ -48,7 +48,7 @@ class SuperNotSecureTests: XCTestCase {
         XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
         
         let obj = TestSuperModel()
-        let result = TestResultModel()
+        let result = TestResult()
         XCTAssertNoThrow(obj.onlySuper(result))
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }

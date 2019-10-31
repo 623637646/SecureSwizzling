@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class TestResultModel: NSObject {
+class TestResult: NSObject {
     
     @objc enum Executed: Int {
         case superMethod = 0

@@ -11,11 +11,11 @@ import XCTest
 class CMDNotSecureTests: XCTestCase {
     
     // only super method + unsecure swizzling
-    func test_onlySuper() {
+    func testSuperMethod() {
         XCTAssert(swizzle_onlySuper_cmd_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.onlySuper(result)
         
         XCTAssert(result.isSelfCMDWrong == false)
@@ -25,11 +25,11 @@ class CMDNotSecureTests: XCTestCase {
     }
     
     // only self method + unsecure swizzling
-    func test_onlySelf() {
+    func testSelfMethod() {
         XCTAssert(swizzle_onlySelf_cmd_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.onlySelf(result)
         
         XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
@@ -39,11 +39,11 @@ class CMDNotSecureTests: XCTestCase {
     }
     
     // in both method + unsecure swizzling
-    func test_inBoth() {
+    func testOverridedMethod() {
         XCTAssert(swizzle_inBoth_cmd_unsecureSwizzling() == true)
         
         let obj = TestModel()
-        let result = TestResultModel()
+        let result = TestResult()
         obj.inBoth(result)
         
         XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
