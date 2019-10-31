@@ -8,48 +8,48 @@
 
 import XCTest
 
-class SuperNotSecureTests: XCTestCase {
+class NotSecureForSuperTests: XCTestCase {
 
     // only super method + unsecure swizzling
     func testSuperMethod() {
-        XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
+        XCTAssert(swizzleSuperMethodUnsecureForSuperSwizzling() == true)
         
         let obj = TestModel()
         let result = TestResult()
-        obj.onlySuper(result)
+        obj.superMethod(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
     // only self method + unsecure swizzling
     func testSelfMethod() {
-        XCTAssert(swizzle_onlySelf_super_unsecureSwizzling() == true)
+        XCTAssert(swizzleSelfMethodUnsecureForSuperSwizzling() == true)
         
         let obj = TestModel()
         let result = TestResult()
-        obj.onlySelf(result)
+        obj.selfMethod(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
     }
     
     // in both method + unsecure swizzling
     func testOverridedMethod() {
-        XCTAssert(swizzle_inBoth_super_unsecureSwizzling() == true)
+        XCTAssert(swizzleOverridedMethodUnsecureForSuperSwizzling() == true)
         
         let obj = TestModel()
         let result = TestResult()
-        obj.inBoth(result)
+        obj.overridedMethod(result)
         
         XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
     }
     
-    // tedt "super object" with "onlySuper" method
-    func test_superObject_onlySuper() {
-        XCTAssert(swizzle_onlySuper_super_unsecureSwizzling() == true)
+    // tedt "super object" with "superMethod" method
+    func testSuperMethodWithSuperObject() {
+        XCTAssert(swizzleSuperMethodUnsecureForSuperSwizzling() == true)
         
         let obj = TestSuperModel()
         let result = TestResult()
-        XCTAssertNoThrow(obj.onlySuper(result))
+        XCTAssertNoThrow(obj.superMethod(result))
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
 

@@ -21,15 +21,15 @@ private var onlySuperMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 
 private let onlySuperMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_onlySuper:"
+    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
     result.executedMethods.append(.swizzledMethod)
     onlySuperMethodOriginal.pointee?(`self`, _cmd, result)
 }
 
-func swizzle_onlySuper_secureSwizzling() -> Bool {
+func swizzleSuperMethodSecureSwizzling() -> Bool {
     return onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-        return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.onlySuper(_:)),
+        return classSwizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.superMethod(_:)),
                                            replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
                                            store: pointer)
     }
@@ -45,15 +45,15 @@ private var onlySelfMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 
 private let onlySelfMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_onlySelf:"
+    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_selfMethod:"
     result.executedMethods.append(.swizzledMethod)
     onlySelfMethodOriginal.pointee?(`self`, _cmd, result)
 }
 
-func swizzle_onlySelf_secureSwizzling() -> Bool {
+func swizzleSelfMethodSecureSwizzling() -> Bool {
     return onlySelfMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-        return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.onlySelf(_:)),
+        return classSwizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.selfMethod(_:)),
                                            replacement: unsafeBitCast(onlySelfMethodSwizzled, to: IMP.self),
                                            store: pointer)
     }
@@ -69,15 +69,15 @@ private var inBothMethodOriginal: UnsafeMutablePointer<MethodType?> = {
 
 private let inBothMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_inBoth:"
+    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_overridedMethod:"
     result.executedMethods.append(.swizzledMethod)
     inBothMethodOriginal.pointee?(`self`, _cmd, result)
 }
 
-func swizzle_inBoth_secureSwizzling() -> Bool {
+func swizzleOverridedMethodSecureSwizzling() -> Bool {
     return inBothMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-        return class_swizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.inBoth(_:)),
+        return classSwizzleMethodAndStore(theClass: TestModel.self,
+                                           original: #selector(TestModel.overridedMethod(_:)),
                                            replacement: unsafeBitCast(inBothMethodSwizzled, to: IMP.self),
                                            store: pointer)
     }
@@ -85,7 +85,7 @@ func swizzle_inBoth_secureSwizzling() -> Bool {
 
 // MARK: utilities
 
-private func class_swizzleMethodAndStore(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
+private func classSwizzleMethodAndStore(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
     guard let originalMethod = class_getInstanceMethod(theClass, original) else {
         return false
     }

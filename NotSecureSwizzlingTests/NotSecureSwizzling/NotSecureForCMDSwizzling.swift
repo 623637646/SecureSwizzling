@@ -8,25 +8,25 @@
 
 import Foundation
 
-func swizzle_onlySuper_cmd_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.onlySuper(_:)),
-                         swizzledSelector: #selector(TestModel._onlySuper(_:)))
+func swizzleSuperMethodUnsecureForCMDSwizzling() -> Bool {
+    swizzleNotSecureForCMD(class: TestModel.self,
+                         originalSel: #selector(TestModel.superMethod(_:)),
+                         swizzledSelector: #selector(TestModel._superMethod(_:)))
 }
 
-func swizzle_onlySelf_cmd_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.onlySelf(_:)),
-                         swizzledSelector: #selector(TestModel._onlySelf(_:)))
+func swizzleSelfMethodUnsecureForCMDSwizzling() -> Bool {
+    swizzleNotSecureForCMD(class: TestModel.self,
+                         originalSel: #selector(TestModel.selfMethod(_:)),
+                         swizzledSelector: #selector(TestModel._selfMethod(_:)))
 }
 
-func swizzle_inBoth_cmd_unsecureSwizzling() -> Bool {
-    swizzle_CMDNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.inBoth(_:)),
-                         swizzledSelector: #selector(TestModel._(inBoth:)))
+func swizzleOverridedMethodUnsecureForCMDSwizzling() -> Bool {
+    swizzleNotSecureForCMD(class: TestModel.self,
+                         originalSel: #selector(TestModel.overridedMethod(_:)),
+                         swizzledSelector: #selector(TestModel._overridedMethod(_:)))
 }
 
-private func swizzle_CMDNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
+private func swizzleNotSecureForCMD(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
     // prepare
     guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
         return false

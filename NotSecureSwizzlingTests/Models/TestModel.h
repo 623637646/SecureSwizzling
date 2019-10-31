@@ -14,15 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestSuperModel : NSObject
 
-- (void)onlySuper:(TestResult *)result;
+- (void)superMethod:(TestResult *)result;
 
-- (void)inBoth:(TestResult *)result;
+- (void)overridedMethod:(TestResult *)result;
 
 @end
 
 @interface TestModel : TestSuperModel
 
-- (void)onlySelf:(TestResult *)result;
+- (void)selfMethod:(TestResult *)result;
 
 @end
 

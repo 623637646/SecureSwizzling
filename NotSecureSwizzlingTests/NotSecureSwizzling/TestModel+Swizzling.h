@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestModel (Swizzling)
 
-- (void)_onlySelf:(TestResult *)result;
+- (void)_selfMethod:(TestResult *)result;
 
-- (void)_onlySuper:(TestResult *)result;
+- (void)_superMethod:(TestResult *)result;
 
-- (void)_inBoth:(TestResult *)result;
+- (void)_overridedMethod:(TestResult *)result;
 
 @end
 

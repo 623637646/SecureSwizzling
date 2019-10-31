@@ -8,25 +8,25 @@
 
 import Foundation
 
-func swizzle_onlySuper_super_unsecureSwizzling() -> Bool {
-    swizzle_SuperNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.onlySuper(_:)),
-                         swizzledSelector: #selector(TestModel._onlySuper(_:)))
+func swizzleSuperMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                         originalSel: #selector(TestModel.superMethod(_:)),
+                         swizzledSelector: #selector(TestModel._superMethod(_:)))
 }
 
-func swizzle_onlySelf_super_unsecureSwizzling() -> Bool {
-    swizzle_SuperNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.onlySelf(_:)),
-                         swizzledSelector: #selector(TestModel._onlySelf(_:)))
+func swizzleSelfMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                         originalSel: #selector(TestModel.selfMethod(_:)),
+                         swizzledSelector: #selector(TestModel._selfMethod(_:)))
 }
 
-func swizzle_inBoth_super_unsecureSwizzling() -> Bool {
-    swizzle_SuperNotSecure(class: TestModel.self,
-                         originalSel: #selector(TestModel.inBoth(_:)),
-                         swizzledSelector: #selector(TestModel._(inBoth:)))
+func swizzleOverridedMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                         originalSel: #selector(TestModel.overridedMethod(_:)),
+                         swizzledSelector: #selector(TestModel._overridedMethod(_:)))
 }
 
-private func swizzle_SuperNotSecure(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
+private func swizzleNotSecureForSuper(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
     // prepare
     guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
         return false

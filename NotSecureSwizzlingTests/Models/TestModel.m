@@ -11,15 +11,15 @@
 
 @implementation TestSuperModel
 
-- (void)onlySuper:(TestResult *)result
+- (void)superMethod:(TestResult *)result
 {
-    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySuper:"];
+    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"superMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
 }
 
-- (void)inBoth:(TestResult *)result
+- (void)overridedMethod:(TestResult *)result
 {
-    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
+    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
 }
 
@@ -27,17 +27,17 @@
 
 @implementation TestModel
 
-- (void)onlySelf:(TestResult *)result
+- (void)selfMethod:(TestResult *)result
 {
-    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"onlySelf:"];
+    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"selfMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
 }
 
-- (void)inBoth:(TestResult *)result
+- (void)overridedMethod:(TestResult *)result
 {
-    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"inBoth:"];
+    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
-    [super inBoth:result];
+    [super overridedMethod:result];
 }
 
 @end

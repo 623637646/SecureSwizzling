@@ -14,7 +14,7 @@ class NoSwizzlingTests: XCTestCase {
     func testSuperMethod() {
         let obj = TestModel()
         let result = TestResult()
-        obj.onlySuper(result)
+        obj.superMethod(result)
         
         XCTAssert(result.isSelfCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
@@ -26,7 +26,7 @@ class NoSwizzlingTests: XCTestCase {
     func testSelfMethod() {
         let obj = TestModel()
         let result = TestResult()
-        obj.onlySelf(result)
+        obj.selfMethod(result)
 
         XCTAssert(result.isSelfCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
@@ -38,7 +38,7 @@ class NoSwizzlingTests: XCTestCase {
     func testOverridedMethod() {
         let obj = TestModel()
         let result = TestResult()
-        obj.inBoth(result)
+        obj.overridedMethod(result)
 
         XCTAssert(result.isSelfCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)

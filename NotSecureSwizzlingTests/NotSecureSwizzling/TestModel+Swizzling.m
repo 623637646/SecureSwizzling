@@ -11,25 +11,25 @@
 
 @implementation TestModel (Swizzling)
 
-- (void)_onlySelf:(TestResult *)result
+- (void)_selfMethod:(TestResult *)result
 {
-    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_onlySelf:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_selfMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
-    [self _onlySelf:result];
+    [self _selfMethod:result];
 }
 
-- (void)_onlySuper:(TestResult *)result
+- (void)_superMethod:(TestResult *)result
 {
-    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_onlySuper:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_superMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
-    [self _onlySuper:result];
+    [self _superMethod:result];
 }
 
-- (void)_inBoth:(TestResult *)result
+- (void)_overridedMethod:(TestResult *)result
 {
-    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_inBoth:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_overridedMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
-    [self _inBoth:result];
+    [self _overridedMethod:result];
 }
 
 @end
