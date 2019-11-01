@@ -35,7 +35,7 @@ func swizzleSuperMethodSecureSwizzling() -> Bool {
     }
 }
 
-// MARK: only self
+// MARK: only sub
 
 private var onlySubMethodOriginal: UnsafeMutablePointer<MethodType?> = {
     let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
@@ -59,26 +59,26 @@ func swizzleSubMethodSecureSwizzling() -> Bool {
     }
 }
 
-// MARK: in both
+// MARK: overrided
 
-private var inBothMethodOriginal: UnsafeMutablePointer<MethodType?> = {
+private var overridedMethodOriginal: UnsafeMutablePointer<MethodType?> = {
     let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
     pointer.initialize(to: nil)
     return pointer
 }()
 
-private let inBothMethodSwizzled: MethodType = {
+private let overridedMethodSwizzled: MethodType = {
     (self: AnyObject, _cmd: Selector, result: TestResult) in
     result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_overridedMethod:"
     result.executedMethods.append(.swizzledMethod)
-    inBothMethodOriginal.pointee?(`self`, _cmd, result)
+    overridedMethodOriginal.pointee?(`self`, _cmd, result)
 }
 
 func swizzleOverridedMethodSecureSwizzling() -> Bool {
-    return inBothMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
+    return overridedMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
         return classSwizzleMethodAndStore(theClass: TestModel.self,
                                            original: #selector(TestModel.overridedMethod(_:)),
-                                           replacement: unsafeBitCast(inBothMethodSwizzled, to: IMP.self),
+                                           replacement: unsafeBitCast(overridedMethodSwizzled, to: IMP.self),
                                            store: pointer)
     }
 }

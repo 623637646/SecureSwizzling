@@ -18,13 +18,13 @@ class SecureTests: XCTestCase {
         let result = TestResult()
         obj.superMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
-    // only self method + secure swizzling
+    // only sub method + secure swizzling
     func testSubMethod() {
         XCTAssert(swizzleSubMethodSecureSwizzling() == true)
         
@@ -32,13 +32,13 @@ class SecureTests: XCTestCase {
         let result = TestResult()
         obj.subMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
     }
     
-    // in both method + secure swizzling
+    // in overrided method + secure swizzling
     func testOverridedMethod() {
         XCTAssert(swizzleOverridedMethodSecureSwizzling() == true)
         
@@ -46,7 +46,7 @@ class SecureTests: XCTestCase {
         let result = TestResult()
         obj.overridedMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])

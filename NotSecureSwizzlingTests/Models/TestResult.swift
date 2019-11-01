@@ -33,7 +33,7 @@ class TestResult: NSObject {
     }
     
     var isSuperCMDWrong: Bool = false
-    var isSelfCMDWrong: Bool = false
+    var isSubCMDWrong: Bool = false
     var isSwizzledCMDWrong: Bool = false
     
     override init() {

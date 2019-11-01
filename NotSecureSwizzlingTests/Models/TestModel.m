@@ -29,13 +29,13 @@
 
 - (void)subMethod:(TestResult *)result
 {
-    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"subMethod:"];
+    result.isSubCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"subMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSubMethod)];
 }
 
 - (void)overridedMethod:(TestResult *)result
 {
-    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
+    result.isSubCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSubMethod)];
     [super overridedMethod:result];
 }

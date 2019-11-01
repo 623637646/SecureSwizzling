@@ -18,13 +18,13 @@ class NotSecureForCMDTests: XCTestCase {
         let result = TestResult()
         obj.superMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
-    // only self method + unsecure swizzling
+    // only sub method + unsecure swizzling
     func testSubMethod() {
         XCTAssert(swizzleSubMethodUnsecureForCMDSwizzling() == true)
         
@@ -32,13 +32,13 @@ class NotSecureForCMDTests: XCTestCase {
         let result = TestResult()
         obj.subMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
     }
     
-    // in both method + unsecure swizzling
+    // in overrided method + unsecure swizzling
     func testOverridedMethod() {
         XCTAssert(swizzleOverridedMethodUnsecureForCMDSwizzling() == true)
         
@@ -46,7 +46,7 @@ class NotSecureForCMDTests: XCTestCase {
         let result = TestResult()
         obj.overridedMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
+        XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])

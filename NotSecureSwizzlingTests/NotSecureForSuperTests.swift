@@ -21,7 +21,7 @@ class NotSecureForSuperTests: XCTestCase {
         XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
     }
     
-    // only self method + unsecure swizzling
+    // only sub method + unsecure swizzling
     func testSubMethod() {
         XCTAssert(swizzleSubMethodUnsecureForSuperSwizzling() == true)
         
@@ -32,7 +32,7 @@ class NotSecureForSuperTests: XCTestCase {
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
     }
     
-    // in both method + unsecure swizzling
+    // in overrided method + unsecure swizzling
     func testOverridedMethod() {
         XCTAssert(swizzleOverridedMethodUnsecureForSuperSwizzling() == true)
         

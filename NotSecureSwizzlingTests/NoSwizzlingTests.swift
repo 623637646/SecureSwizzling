@@ -16,31 +16,31 @@ class NoSwizzlingTests: XCTestCase {
         let result = TestResult()
         obj.superMethod(result)
         
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.superMethod])
     }
 
-    // only self method + no-swizzling
+    // only sub method + no-swizzling
     func testSubMethod() {
         let obj = TestModel()
         let result = TestResult()
         obj.subMethod(result)
 
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.subMethod])
     }
 
-    // in both method + no-swizzling
+    // in overrided method + no-swizzling
     func testOverridedMethod() {
         let obj = TestModel()
         let result = TestResult()
         obj.overridedMethod(result)
 
-        XCTAssert(result.isSelfCMDWrong == false)
+        XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
         XCTAssert(result.executedMethods == [.subMethod, .superMethod])
