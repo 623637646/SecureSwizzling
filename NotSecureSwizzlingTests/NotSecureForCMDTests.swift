@@ -25,17 +25,17 @@ class NotSecureForCMDTests: XCTestCase {
     }
     
     // only self method + unsecure swizzling
-    func testSelfMethod() {
-        XCTAssert(swizzleSelfMethodUnsecureForCMDSwizzling() == true)
+    func testSubMethod() {
+        XCTAssert(swizzleSubMethodUnsecureForCMDSwizzling() == true)
         
         let obj = TestModel()
         let result = TestResult()
-        obj.selfMethod(result)
+        obj.subMethod(result)
         
         XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
     }
     
     // in both method + unsecure swizzling
@@ -49,7 +49,7 @@ class NotSecureForCMDTests: XCTestCase {
         XCTAssert(result.isSelfCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
     }
 
 }

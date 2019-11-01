@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestModel : TestSuperModel
 
-- (void)selfMethod:(TestResult *)result;
+- (void)subMethod:(TestResult *)result;
 
 @end
 

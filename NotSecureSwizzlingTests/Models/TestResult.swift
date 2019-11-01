@@ -13,7 +13,7 @@ class TestResult: NSObject {
     
     @objc enum Executed: Int {
         case superMethod = 0
-        case selfMethod = 1
+        case subMethod = 1
         case swizzledMethod = 2
     }
     

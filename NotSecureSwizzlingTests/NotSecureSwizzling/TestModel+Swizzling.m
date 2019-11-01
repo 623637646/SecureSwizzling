@@ -11,11 +11,11 @@
 
 @implementation TestModel (Swizzling)
 
-- (void)_selfMethod:(TestResult *)result
+- (void)_subMethod:(TestResult *)result
 {
-    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_selfMethod:"];
+    result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_subMethod:"];
     result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
-    [self _selfMethod:result];
+    [self _subMethod:result];
 }
 
 - (void)_superMethod:(TestResult *)result

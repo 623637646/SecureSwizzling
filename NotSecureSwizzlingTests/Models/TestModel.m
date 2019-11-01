@@ -27,16 +27,16 @@
 
 @implementation TestModel
 
-- (void)selfMethod:(TestResult *)result
+- (void)subMethod:(TestResult *)result
 {
-    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"selfMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
+    result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"subMethod:"];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSubMethod)];
 }
 
 - (void)overridedMethod:(TestResult *)result
 {
     result.isSelfCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSelfMethod)];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSubMethod)];
     [super overridedMethod:result];
 }
 

@@ -22,14 +22,14 @@ class NotSecureForSuperTests: XCTestCase {
     }
     
     // only self method + unsecure swizzling
-    func testSelfMethod() {
-        XCTAssert(swizzleSelfMethodUnsecureForSuperSwizzling() == true)
+    func testSubMethod() {
+        XCTAssert(swizzleSubMethodUnsecureForSuperSwizzling() == true)
         
         let obj = TestModel()
         let result = TestResult()
-        obj.selfMethod(result)
+        obj.subMethod(result)
         
-        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
     }
     
     // in both method + unsecure swizzling
@@ -40,7 +40,7 @@ class NotSecureForSuperTests: XCTestCase {
         let result = TestResult()
         obj.overridedMethod(result)
         
-        XCTAssert(result.executedMethods == [.swizzledMethod, .selfMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
     }
     
     // tedt "super object" with "superMethod" method

@@ -14,10 +14,10 @@ func swizzleSuperMethodUnsecureForCMDSwizzling() -> Bool {
                          swizzledSelector: #selector(TestModel._superMethod(_:)))
 }
 
-func swizzleSelfMethodUnsecureForCMDSwizzling() -> Bool {
+func swizzleSubMethodUnsecureForCMDSwizzling() -> Bool {
     swizzleNotSecureForCMD(class: TestModel.self,
-                         originalSel: #selector(TestModel.selfMethod(_:)),
-                         swizzledSelector: #selector(TestModel._selfMethod(_:)))
+                         originalSel: #selector(TestModel.subMethod(_:)),
+                         swizzledSelector: #selector(TestModel._subMethod(_:)))
 }
 
 func swizzleOverridedMethodUnsecureForCMDSwizzling() -> Bool {
