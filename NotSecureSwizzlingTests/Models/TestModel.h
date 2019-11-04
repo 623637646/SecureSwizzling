@@ -14,14 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestSuperModel : NSObject
 
+// This method is only in super class (TestSuperModel)
 - (void)superMethod:(TestResult *)result;
 
+// This method is override by subclass (TestModel)
 - (void)overridedMethod:(TestResult *)result;
 
 @end
 
 @interface TestModel : TestSuperModel
 
+// This method is only in subclass (TestModel)
 - (void)subMethod:(TestResult *)result;
 
 @end

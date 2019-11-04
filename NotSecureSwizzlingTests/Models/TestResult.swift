@@ -8,6 +8,7 @@
 
 import Foundation
 
+// This class is just for record behavior logs
 @objcMembers
 class TestResult: NSObject {
     
@@ -17,8 +18,10 @@ class TestResult: NSObject {
         case swizzledMethod = 2
     }
     
+    // The order of methods be executed.
     var executedMethods: [Executed] = []
     
+    // "executedMethods" API for objective-C
     var objc_executedMethods: [Int] {
         get {
             return executedMethods.map { (executed) -> Int in
@@ -35,9 +38,5 @@ class TestResult: NSObject {
     var isSuperCMDWrong: Bool = false
     var isSubCMDWrong: Bool = false
     var isSwizzledCMDWrong: Bool = false
-    
-    override init() {
-        super.init()
-    }
     
 }
