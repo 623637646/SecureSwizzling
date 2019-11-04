@@ -49,7 +49,7 @@ class NotSecureForSuperTests: XCTestCase {
         
         let obj = TestSuperModel()
         let result = TestResult()
-        XCTAssertNoThrow(obj.superMethod(result))
+        obj.superMethod(result)
         XCTAssert(result.executedMethods == [.superMethod])
     }
 

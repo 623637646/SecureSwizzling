@@ -16,7 +16,7 @@ class NotSecureForCMDTests: XCTestCase {
         
         let superObj = TestSuperModel()
         let superResult = TestResult()
-        XCTAssertNoThrow(superObj.superMethod(superResult))
+        superObj.superMethod(superResult)
         XCTAssert(superResult.executedMethods == [.superMethod])
         
         let obj = TestModel()
