@@ -29,9 +29,9 @@ private let onlySuperMethodSwizzled: MethodType = {
 func swizzleSuperMethodSecureSwizzling() -> Bool {
     return onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
         return classSwizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.superMethod(_:)),
-                                           replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
-                                           store: pointer)
+                                          original: #selector(TestModel.superMethod(_:)),
+                                          replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
+                                          store: pointer)
     }
 }
 
@@ -53,9 +53,9 @@ private let onlySubMethodSwizzled: MethodType = {
 func swizzleSubMethodSecureSwizzling() -> Bool {
     return onlySubMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
         return classSwizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.subMethod(_:)),
-                                           replacement: unsafeBitCast(onlySubMethodSwizzled, to: IMP.self),
-                                           store: pointer)
+                                          original: #selector(TestModel.subMethod(_:)),
+                                          replacement: unsafeBitCast(onlySubMethodSwizzled, to: IMP.self),
+                                          store: pointer)
     }
 }
 
@@ -77,9 +77,9 @@ private let overridedMethodSwizzled: MethodType = {
 func swizzleOverridedMethodSecureSwizzling() -> Bool {
     return overridedMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
         return classSwizzleMethodAndStore(theClass: TestModel.self,
-                                           original: #selector(TestModel.overridedMethod(_:)),
-                                           replacement: unsafeBitCast(overridedMethodSwizzled, to: IMP.self),
-                                           store: pointer)
+                                          original: #selector(TestModel.overridedMethod(_:)),
+                                          replacement: unsafeBitCast(overridedMethodSwizzled, to: IMP.self),
+                                          store: pointer)
     }
 }
 

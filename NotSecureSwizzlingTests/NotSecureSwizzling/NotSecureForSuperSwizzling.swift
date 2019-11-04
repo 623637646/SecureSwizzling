@@ -10,20 +10,20 @@ import Foundation
 
 func swizzleSuperMethodUnsecureForSuperSwizzling() -> Bool {
     swizzleNotSecureForSuper(class: TestModel.self,
-                         originalSel: #selector(TestModel.superMethod(_:)),
-                         swizzledSelector: #selector(TestModel._superMethod(_:)))
+                             originalSel: #selector(TestModel.superMethod(_:)),
+                             swizzledSelector: #selector(TestModel._superMethod(_:)))
 }
 
 func swizzleSubMethodUnsecureForSuperSwizzling() -> Bool {
     swizzleNotSecureForSuper(class: TestModel.self,
-                         originalSel: #selector(TestModel.subMethod(_:)),
-                         swizzledSelector: #selector(TestModel._subMethod(_:)))
+                             originalSel: #selector(TestModel.subMethod(_:)),
+                             swizzledSelector: #selector(TestModel._subMethod(_:)))
 }
 
 func swizzleOverridedMethodUnsecureForSuperSwizzling() -> Bool {
     swizzleNotSecureForSuper(class: TestModel.self,
-                         originalSel: #selector(TestModel.overridedMethod(_:)),
-                         swizzledSelector: #selector(TestModel._overridedMethod(_:)))
+                             originalSel: #selector(TestModel.overridedMethod(_:)),
+                             swizzledSelector: #selector(TestModel._overridedMethod(_:)))
 }
 
 private func swizzleNotSecureForSuper(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
