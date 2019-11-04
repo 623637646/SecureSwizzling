@@ -14,6 +14,11 @@ class NotSecureForCMDTests: XCTestCase {
     func testSuperMethod() {
         XCTAssert(swizzleSuperMethodUnsecureForCMDSwizzling() == true)
         
+        let superObj = TestSuperModel()
+        let superResult = TestResult()
+        XCTAssertNoThrow(superObj.superMethod(superResult))
+        XCTAssert(superResult.executedMethods == [.superMethod])
+        
         let obj = TestModel()
         let result = TestResult()
         obj.superMethod(result)
