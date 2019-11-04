@@ -14,6 +14,11 @@ class SecureTests: XCTestCase {
     func testSuperMethod() {
         XCTAssert(swizzleSuperMethodSecureSwizzling() == true)
         
+        let superObj = TestSuperModel()
+        let superResult = TestResult()
+        superObj.superMethod(superResult)
+        XCTAssert(superResult.executedMethods == [.superMethod])
+        
         let obj = TestModel()
         let result = TestResult()
         obj.superMethod(result)
