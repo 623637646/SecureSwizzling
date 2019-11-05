@@ -12,11 +12,11 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // only super method + secure swizzling
     func testSuperMethod() {
-        let success = onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-            return swizzleMethodWithStaticFunc(theClass: TestModel.self,
-                                               original: #selector(TestModel.superMethod(_:)),
-                                               replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
-                                               store: pointer)
+        let success = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                original: #selector(TestModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
+            result.executedMethods.append(.swizzledMethod)
         }
         XCTAssert(success == true)
         
@@ -32,11 +32,11 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // only sub method + secure swizzling
     func testSubMethod() {
-        let success = onlySubMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-            return swizzleMethodWithStaticFunc(theClass: TestModel.self,
-                                               original: #selector(TestModel.subMethod(_:)),
-                                               replacement: unsafeBitCast(onlySubMethodSwizzled, to: IMP.self),
-                                               store: pointer)
+        let success = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                original: #selector(TestModel.subMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_subMethod:"
+            result.executedMethods.append(.swizzledMethod)
         }
         XCTAssert(success == true)
         
@@ -52,11 +52,11 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // in overrided method + secure swizzling
     func testOverridedMethod() {
-        let success = overridedMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-            return swizzleMethodWithStaticFunc(theClass: TestModel.self,
-                                               original: #selector(TestModel.overridedMethod(_:)),
-                                               replacement: unsafeBitCast(overridedMethodSwizzled, to: IMP.self),
-                                               store: pointer)
+        let success = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                original: #selector(TestModel.overridedMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_overridedMethod:"
+            result.executedMethods.append(.swizzledMethod)
         }
         XCTAssert(success == true)
         
@@ -72,11 +72,11 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // test "super object" with "superMethod" method
     func testSuperObject() {
-        let success = onlySuperMethodOriginal.withMemoryRebound(to: IMP?.self, capacity: 1) { (pointer) -> Bool in
-            return swizzleMethodWithStaticFunc(theClass: TestModel.self,
-                                               original: #selector(TestModel.superMethod(_:)),
-                                               replacement: unsafeBitCast(onlySuperMethodSwizzled, to: IMP.self),
-                                               store: pointer)
+        let success = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                original: #selector(TestModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
+            result.executedMethods.append(.swizzledMethod)
         }
         XCTAssert(success == true)
         
@@ -94,52 +94,36 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 
 private typealias MethodType = @convention(c) (AnyObject, Selector, TestResult) -> Void
 
-// MARK: only super
-
-private var onlySuperMethodOriginal: UnsafeMutablePointer<MethodType?> = {
-    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
+private var originalIMPPointer: UnsafeMutablePointer<IMP?> = {
+    let pointer = UnsafeMutablePointer<IMP?>.allocate(capacity: 1)
     pointer.initialize(to: nil)
     return pointer
 }()
 
-private let onlySuperMethodSwizzled: MethodType = {
+private let replacementIMP: IMP = unsafeBitCast({
     (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
-    result.executedMethods.append(.swizzledMethod)
-    onlySuperMethodOriginal.pointee?(`self`, _cmd, result)
-}
+//    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
+//    result.executedMethods.append(.swizzledMethod)
+    IMPCallBackFunc?(self, _cmd, result)
+    originalIMPPointer.withMemoryRebound(to: MethodType?.self, capacity: 1) { (pointer) -> Void in
+        pointer.pointee?(self, _cmd, result)
+    }
+} as MethodType, to: IMP.self)
 
-// MARK: only sub
+private var IMPCallBackFunc: ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult)->())? = nil
 
-private var onlySubMethodOriginal: UnsafeMutablePointer<MethodType?> = {
-    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
-    pointer.initialize(to: nil)
-    return pointer
-}()
-
-private let onlySubMethodSwizzled: MethodType = {
-    (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_subMethod:"
-    result.executedMethods.append(.swizzledMethod)
-    onlySubMethodOriginal.pointee?(`self`, _cmd, result)
-}
-
-// MARK: overrided
-
-private var overridedMethodOriginal: UnsafeMutablePointer<MethodType?> = {
-    let pointer = UnsafeMutablePointer<MethodType?>.allocate(capacity: 1)
-    pointer.initialize(to: nil)
-    return pointer
-}()
-
-private let overridedMethodSwizzled: MethodType = {
-    (self: AnyObject, _cmd: Selector, result: TestResult) in
-    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_overridedMethod:"
-    result.executedMethods.append(.swizzledMethod)
-    overridedMethodOriginal.pointee?(`self`, _cmd, result)
-}
 
 // MARK: utilities
+
+private func swizzleMethodForTestModel(theClass: AnyClass,
+                                       original: Selector,
+                                       replacement: (@escaping (_ self: AnyObject, _ _cmd: Selector, _ result: TestResult) -> Void)) -> Bool {
+    IMPCallBackFunc = replacement
+    return swizzleMethodWithStaticFunc(theClass: theClass,
+                                       original: original,
+                                       replacement: replacementIMP,
+                                       store: originalIMPPointer)
+}
 
 private func swizzleMethodWithStaticFunc(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
     guard let originalMethod = class_getInstanceMethod(theClass, original) else {
