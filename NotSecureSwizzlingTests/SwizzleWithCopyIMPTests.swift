@@ -12,12 +12,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // only super method + unsecure swizzling
     func testSuperMethod() {
-        XCTAssert(swizzleSuperMethodUnsecureForCMDSwizzling() == true)
-        
-        let superObj = TestSuperModel()
-        let superResult = TestResult()
-        superObj.superMethod(superResult)
-        XCTAssert(superResult.executedMethods == [.superMethod])
+        XCTAssert(swizzleSuperMethodWithCopyIMP() == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -31,7 +26,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // only sub method + unsecure swizzling
     func testSubMethod() {
-        XCTAssert(swizzleSubMethodUnsecureForCMDSwizzling() == true)
+        XCTAssert(swizzleSubMethodWithCopyIMP() == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -45,7 +40,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // in overrided method + unsecure swizzling
     func testOverridedMethod() {
-        XCTAssert(swizzleOverridedMethodUnsecureForCMDSwizzling() == true)
+        XCTAssert(swizzleOverridedMethodWithCopyIMP() == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -56,28 +51,38 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
     }
+    
+    // test "super object" with "superMethod" method
+    func testSuperObject() {
+        XCTAssert(swizzleSuperMethodWithCopyIMP() == true)
+        
+        let obj = TestSuperModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        XCTAssert(result.executedMethods == [.superMethod])
+    }
 
 }
 
-func swizzleSuperMethodUnsecureForCMDSwizzling() -> Bool {
-    swizzleNotSecureForCMD(class: TestModel.self,
+private func swizzleSuperMethodWithCopyIMP() -> Bool {
+    swizzleWithCopyIMP(class: TestModel.self,
                            originalSel: #selector(TestModel.superMethod(_:)),
                            swizzledSelector: #selector(TestModel._superMethod(_:)))
 }
 
-func swizzleSubMethodUnsecureForCMDSwizzling() -> Bool {
-    swizzleNotSecureForCMD(class: TestModel.self,
+private func swizzleSubMethodWithCopyIMP() -> Bool {
+    swizzleWithCopyIMP(class: TestModel.self,
                            originalSel: #selector(TestModel.subMethod(_:)),
                            swizzledSelector: #selector(TestModel._subMethod(_:)))
 }
 
-func swizzleOverridedMethodUnsecureForCMDSwizzling() -> Bool {
-    swizzleNotSecureForCMD(class: TestModel.self,
+private func swizzleOverridedMethodWithCopyIMP() -> Bool {
+    swizzleWithCopyIMP(class: TestModel.self,
                            originalSel: #selector(TestModel.overridedMethod(_:)),
                            swizzledSelector: #selector(TestModel._overridedMethod(_:)))
 }
 
-private func swizzleNotSecureForCMD(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
+private func swizzleWithCopyIMP(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
     // prepare
     guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
         return false
