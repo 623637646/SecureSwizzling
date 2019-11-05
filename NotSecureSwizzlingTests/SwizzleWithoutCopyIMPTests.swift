@@ -12,9 +12,10 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
     
     // only super method + unsecure swizzling
     func testSuperMethod() {
-        XCTAssert(swizzleWithoutCopyIMP(class: TestModel.self,
-                                        originalSel: #selector(TestModel.superMethod(_:)),
-                                        swizzledSelector: #selector(TestModel._superMethod(_:))) == true)
+        let success = swizzleWithoutCopyIMP(class: TestModel.self,
+                                            originalSel: #selector(TestModel.superMethod(_:)),
+                                            swizzledSelector: #selector(TestModel._superMethod(_:)))
+        XCTAssert(success == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -25,9 +26,10 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
     
     // only sub method + unsecure swizzling
     func testSubMethod() {
-        XCTAssert(swizzleWithoutCopyIMP(class: TestModel.self,
-                                        originalSel: #selector(TestModel.subMethod(_:)),
-                                        swizzledSelector: #selector(TestModel._subMethod(_:))) == true)
+        let success = swizzleWithoutCopyIMP(class: TestModel.self,
+                                            originalSel: #selector(TestModel.subMethod(_:)),
+                                            swizzledSelector: #selector(TestModel._subMethod(_:)))
+        XCTAssert(success == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -38,9 +40,10 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
     
     // in overrided method + unsecure swizzling
     func testOverridedMethod() {
-        XCTAssert(swizzleWithoutCopyIMP(class: TestModel.self,
-                                        originalSel: #selector(TestModel.overridedMethod(_:)),
-                                        swizzledSelector: #selector(TestModel._overridedMethod(_:))) == true)
+        let success = swizzleWithoutCopyIMP(class: TestModel.self,
+                                            originalSel: #selector(TestModel.overridedMethod(_:)),
+                                            swizzledSelector: #selector(TestModel._overridedMethod(_:)))
+        XCTAssert(success == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -51,9 +54,10 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
     
     // test "super object" with "superMethod" method
     func testSuperObject() {
-        XCTAssert(swizzleWithoutCopyIMP(class: TestModel.self,
-                                        originalSel: #selector(TestModel.superMethod(_:)),
-                                        swizzledSelector: #selector(TestModel._superMethod(_:))) == true)
+        let success = swizzleWithoutCopyIMP(class: TestModel.self,
+                                            originalSel: #selector(TestModel.superMethod(_:)),
+                                            swizzledSelector: #selector(TestModel._superMethod(_:)))
+        XCTAssert(success == true)
         
         let obj = TestSuperModel()
         let result = TestResult()
