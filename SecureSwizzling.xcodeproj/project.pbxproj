@@ -130,14 +130,14 @@
 				2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */,
 				2AF4062C235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift */,
 				2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */,
-				2AE1987C23605D4D0073B785 /* Models */,
+				2AE1987C23605D4D0073B785 /* Others */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
 			);
 			path = NotSecureSwizzlingTests;
 			sourceTree = "<group>";
 		};
-		2AE1987C23605D4D0073B785 /* Models */ = {
+		2AE1987C23605D4D0073B785 /* Others */ = {
 			isa = PBXGroup;
 			children = (
 				2A50D04C235DA87200D7D800 /* TestModel.h */,
@@ -146,7 +146,7 @@
 				2AE1987E23605E8A0073B785 /* TestModel+Swizzling.h */,
 				2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */,
 			);
-			path = Models;
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
