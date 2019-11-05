@@ -1,12 +1,63 @@
 //
-//  CMDSecureSwizzling.swift
+//  SwizzleWithStaticFuncTests.swift
 //  NotSecureSwizzlingTests
 //
-//  Created by Yanni Wang on 23/10/19.
+//  Created by Yanni Wang on 25/10/19.
 //  Copyright © 2019 Yanni. All rights reserved.
 //
 
-import Foundation
+import XCTest
+
+class SwizzleWithStaticFuncTests: XCTestCase {
+    
+    // only super method + secure swizzling
+    func testSuperMethod() {
+        XCTAssert(swizzleSuperMethodSecureSwizzling() == true)
+        
+        let superObj = TestSuperModel()
+        let superResult = TestResult()
+        superObj.superMethod(superResult)
+        XCTAssert(superResult.executedMethods == [.superMethod])
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+    }
+    
+    // only sub method + secure swizzling
+    func testSubMethod() {
+        XCTAssert(swizzleSubMethodSecureSwizzling() == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.subMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
+    }
+    
+    // in overrided method + secure swizzling
+    func testOverridedMethod() {
+        XCTAssert(swizzleOverridedMethodSecureSwizzling() == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.overridedMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
+    }
+
+}
 
 private typealias MethodType = @convention(c) (AnyObject, Selector, TestResult) -> Void
 
@@ -100,5 +151,3 @@ private func classSwizzleMethodAndStore(theClass: AnyClass, original: Selector, 
     store.pointee = impNotNil
     return true
 }
-
-

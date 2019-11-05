@@ -1,5 +1,5 @@
 //
-//  SuperNotSecureTests.swift
+//  SwizzleWithoutCopyIMPTests.swift
 //  NotSecureSwizzlingTests
 //
 //  Created by Yanni Wang on 25/10/19.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class NotSecureForSuperTests: XCTestCase {
+class SwizzleWithoutCopyIMPTests: XCTestCase {
 
     // only super method + unsecure swizzling
     func testSuperMethod() {
@@ -53,4 +53,35 @@ class NotSecureForSuperTests: XCTestCase {
         XCTAssert(result.executedMethods == [.superMethod])
     }
 
+}
+
+func swizzleSuperMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                             originalSel: #selector(TestModel.superMethod(_:)),
+                             swizzledSelector: #selector(TestModel._superMethod(_:)))
+}
+
+func swizzleSubMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                             originalSel: #selector(TestModel.subMethod(_:)),
+                             swizzledSelector: #selector(TestModel._subMethod(_:)))
+}
+
+func swizzleOverridedMethodUnsecureForSuperSwizzling() -> Bool {
+    swizzleNotSecureForSuper(class: TestModel.self,
+                             originalSel: #selector(TestModel.overridedMethod(_:)),
+                             swizzledSelector: #selector(TestModel._overridedMethod(_:)))
+}
+
+private func swizzleNotSecureForSuper(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
+    // prepare
+    guard let originalMethod = class_getInstanceMethod(`class`, originalSel) else {
+        return false
+    }
+    guard let swizzledMethod = class_getInstanceMethod(`class`, swizzledSelector) else {
+        return false
+    }
+    // swizzling
+    method_exchangeImplementations(originalMethod, swizzledMethod)
+    return true
 }
