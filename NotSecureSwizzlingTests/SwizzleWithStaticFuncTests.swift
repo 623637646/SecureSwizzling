@@ -102,8 +102,6 @@ private var originalIMPPointer: UnsafeMutablePointer<IMP?> = {
 
 private let replacementIMP: IMP = unsafeBitCast({
     (self: AnyObject, _cmd: Selector, result: TestResult) in
-//    result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) == "_superMethod:"
-//    result.executedMethods.append(.swizzledMethod)
     IMPCallBackFunc?(self, _cmd, result)
     originalIMPPointer.withMemoryRebound(to: MethodType?.self, capacity: 1) { (pointer) -> Void in
         pointer.pointee?(self, _cmd, result)
