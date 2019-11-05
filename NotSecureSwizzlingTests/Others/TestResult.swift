@@ -15,8 +15,8 @@ class TestResult: NSObject {
     @objc enum Executed: Int {
         case superMethod = 0
         case subMethod
-        case swizzledSuperMethod
-        case swizzledSubMethod
+        case swizzledMethodInSuper
+        case swizzledMethodInSub
     }
     
     // The order of methods be executed.

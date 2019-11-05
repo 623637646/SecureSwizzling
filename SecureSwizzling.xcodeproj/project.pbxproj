@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A3FEFEE2371828D00AC29FA /* TestSuperModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FEFED2371828D00AC29FA /* TestSuperModel.m */; };
+		2A3FEFF1237184AD00AC29FA /* TestSuperModel+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FEFF0237184AD00AC29FA /* TestSuperModel+Swizzling.m */; };
 		2A50D04E235DA87200D7D800 /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A50D04D235DA87200D7D800 /* TestModel.m */; };
 		2A59C545235EA5BC00518B6B /* TestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A59C544235EA5BC00518B6B /* TestResult.swift */; };
 		2A7089912359757000071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		2A3FEFEC2371828D00AC29FA /* TestSuperModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSuperModel.h; sourceTree = "<group>"; };
 		2A3FEFED2371828D00AC29FA /* TestSuperModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSuperModel.m; sourceTree = "<group>"; };
+		2A3FEFEF237184AD00AC29FA /* TestSuperModel+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestSuperModel+Swizzling.h"; sourceTree = "<group>"; };
+		2A3FEFF0237184AD00AC29FA /* TestSuperModel+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TestSuperModel+Swizzling.m"; sourceTree = "<group>"; };
 		2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotSecureSwizzlingTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2A50D04C235DA87200D7D800 /* TestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
 		2A50D04D235DA87200D7D800 /* TestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				2A59C544235EA5BC00518B6B /* TestResult.swift */,
 				2AE1987E23605E8A0073B785 /* TestModel+Swizzling.h */,
 				2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */,
+				2A3FEFEF237184AD00AC29FA /* TestSuperModel+Swizzling.h */,
+				2A3FEFF0237184AD00AC29FA /* TestSuperModel+Swizzling.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				2AF4062D235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift in Sources */,
 				2AE1988023605E8A0073B785 /* TestModel+Swizzling.m in Sources */,
 				2ADE11372362B00100DA6776 /* NoSwizzlingTests.swift in Sources */,
+				2A3FEFF1237184AD00AC29FA /* TestSuperModel+Swizzling.m in Sources */,
 				2A3FEFEE2371828D00AC29FA /* TestSuperModel.m in Sources */,
 				2A50D04E235DA87200D7D800 /* TestModel.m in Sources */,
 				2ADE113C2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift in Sources */,

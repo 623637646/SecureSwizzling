@@ -16,7 +16,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
                                                 original: #selector(TestModel.superMethod(_:)))
         { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-            result.executedMethods.append(.swizzledSubMethod)
+            result.executedMethods.append(.swizzledMethodInSub)
         }
         XCTAssert(success == true)
         
@@ -27,7 +27,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
     }
     
     // only sub method + secure swizzling
@@ -36,7 +36,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
                                                 original: #selector(TestModel.subMethod(_:)))
         { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "subMethod:"
-            result.executedMethods.append(.swizzledSubMethod)
+            result.executedMethods.append(.swizzledMethodInSub)
         }
         XCTAssert(success == true)
         
@@ -47,7 +47,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .subMethod])
     }
     
     // in overrided method + secure swizzling
@@ -56,7 +56,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
                                                 original: #selector(TestModel.overridedMethod(_:)))
         { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "overridedMethod:"
-            result.executedMethods.append(.swizzledSubMethod)
+            result.executedMethods.append(.swizzledMethodInSub)
         }
         XCTAssert(success == true)
         
@@ -67,7 +67,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .subMethod, .superMethod])
     }
     
     // test "super object" with "superMethod" method
@@ -76,7 +76,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
                                                 original: #selector(TestModel.superMethod(_:)))
         { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-            result.executedMethods.append(.swizzledSubMethod)
+            result.executedMethods.append(.swizzledMethodInSub)
         }
         XCTAssert(success == true)
         
@@ -92,7 +92,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //                                                        original: #selector(TestSuperModel.superMethod(_:)))
 //        { (self: AnyObject, _cmd: Selector, result: TestResult) in
 //            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledSuperMethod)
+//            result.executedMethods.append(.swizzledMethodInSuper)
 //        }
 //        XCTAssert(successForSuper == true)
 //        
@@ -100,7 +100,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //                                                      original: #selector(TestModel.superMethod(_:)))
 //        { (self: AnyObject, _cmd: Selector, result: TestResult) in
 //            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledSubMethod)
+//            result.executedMethods.append(.swizzledMethodInSub)
 //        }
 //        XCTAssert(successForSub == true)
 //        
@@ -111,7 +111,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //        XCTAssert(result.isSubCMDWrong == false)
 //        XCTAssert(result.isSuperCMDWrong == false)
 //        XCTAssert(result.isSwizzledCMDWrong == false)
-//        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
+//        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
 //    }
 //    
 //    // sub swizzling not work
@@ -120,7 +120,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //                                                      original: #selector(TestModel.superMethod(_:)))
 //        { (self: AnyObject, _cmd: Selector, result: TestResult) in
 //            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledSubMethod)
+//            result.executedMethods.append(.swizzledMethodInSub)
 //        }
 //        XCTAssert(successForSub == true)
 //        
@@ -128,7 +128,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //                                                        original: #selector(TestSuperModel.superMethod(_:)))
 //        { (self: AnyObject, _cmd: Selector, result: TestResult) in
 //            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledSuperMethod)
+//            result.executedMethods.append(.swizzledMethodInSuper)
 //        }
 //        XCTAssert(successForSuper == true)
 //        
@@ -139,7 +139,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
 //        XCTAssert(result.isSubCMDWrong == false)
 //        XCTAssert(result.isSuperCMDWrong == false)
 //        XCTAssert(result.isSwizzledCMDWrong == false)
-//        XCTAssert(result.executedMethods == [.swizzledSuperMethod, .superMethod])
+//        XCTAssert(result.executedMethods == [.swizzledMethodInSuper, .superMethod])
 //    }
     
 }

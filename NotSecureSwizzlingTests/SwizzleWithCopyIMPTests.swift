@@ -14,7 +14,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     func testSuperMethod() {
         let success = swizzleWithCopyIMP(class: TestModel.self,
                                          originalSel: #selector(TestModel.superMethod(_:)),
-                                         swizzledSelector: #selector(TestModel._superMethod(_:)))
+                                         swizzledSelector: #selector(TestModel._sub_superMethod(_:)))
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -24,14 +24,14 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
     }
     
     // only sub method + unsecure swizzling
     func testSubMethod() {
         let success = swizzleWithCopyIMP(class: TestModel.self,
                                          originalSel: #selector(TestModel.subMethod(_:)),
-                                         swizzledSelector: #selector(TestModel._subMethod(_:)))
+                                         swizzledSelector: #selector(TestModel._sub_subMethod(_:)))
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -41,14 +41,14 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .subMethod])
     }
     
     // in overrided method + unsecure swizzling
     func testOverridedMethod() {
         let success = swizzleWithCopyIMP(class: TestModel.self,
                                          originalSel: #selector(TestModel.overridedMethod(_:)),
-                                         swizzledSelector: #selector(TestModel._overridedMethod(_:)))
+                                         swizzledSelector: #selector(TestModel._sub_overridedMethod(_:)))
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -58,14 +58,14 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .subMethod, .superMethod])
     }
     
     // test "super object" with "superMethod" method
     func testSuperObject() {
         let success = swizzleWithCopyIMP(class: TestModel.self,
                                          originalSel: #selector(TestModel.superMethod(_:)),
-                                         swizzledSelector: #selector(TestModel._superMethod(_:)))
+                                         swizzledSelector: #selector(TestModel._sub_superMethod(_:)))
         XCTAssert(success == true)
         
         let obj = TestSuperModel()
