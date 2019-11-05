@@ -3,3 +3,4 @@
 //
 #import "TestModel.h"
 #import "TestModel+Swizzling.h"
+#import "TestSuperModel+Swizzling.h"

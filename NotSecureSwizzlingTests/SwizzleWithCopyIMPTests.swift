@@ -74,6 +74,44 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.executedMethods == [.superMethod])
     }
     
+    func testSwizzleSuperThenSub() {
+        
+        let successForSuper = swizzleWithCopyIMP(class: TestSuperModel.self,
+                                                 originalSel: #selector(TestSuperModel.superMethod(_:)),
+                                                 swizzledSelector: #selector(TestSuperModel._super_superMethod(_:)))
+        XCTAssert(successForSuper == true)
+        
+        let successForSub = swizzleWithCopyIMP(class: TestModel.self,
+                                               originalSel: #selector(TestModel.superMethod(_:)),
+                                               swizzledSelector: #selector(TestModel._sub_superMethod(_:)))
+        XCTAssert(successForSub == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .swizzledMethodInSuper, .superMethod])
+    }
+    
+    func testSwizzleSubThenSuper() {
+        let successForSub = swizzleWithCopyIMP(class: TestModel.self,
+                                               originalSel: #selector(TestModel.superMethod(_:)),
+                                               swizzledSelector: #selector(TestModel._sub_superMethod(_:)))
+        XCTAssert(successForSub == true)
+        
+        let successForSuper = swizzleWithCopyIMP(class: TestSuperModel.self,
+                                                 originalSel: #selector(TestSuperModel.superMethod(_:)),
+                                                 swizzledSelector: #selector(TestSuperModel._super_superMethod(_:)))
+        XCTAssert(successForSuper == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        // MARK: It's wrong here. should be [.swizzledMethodInSub, .swizzledMethodInSuper, .superMethod]
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
+    }
+    
 }
 
 private func swizzleWithCopyIMP(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
