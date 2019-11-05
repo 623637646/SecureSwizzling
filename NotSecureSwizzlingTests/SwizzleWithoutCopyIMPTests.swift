@@ -21,7 +21,7 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
         let result = TestResult()
         obj.superMethod(result)
         
-        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
     }
     
     // only sub method + unsecure swizzling
@@ -35,7 +35,7 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
         let result = TestResult()
         obj.subMethod(result)
         
-        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod])
     }
     
     // in overrided method + unsecure swizzling
@@ -49,7 +49,7 @@ class SwizzleWithoutCopyIMPTests: XCTestCase {
         let result = TestResult()
         obj.overridedMethod(result)
         
-        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod, .superMethod])
     }
     
     // test "super object" with "superMethod" method

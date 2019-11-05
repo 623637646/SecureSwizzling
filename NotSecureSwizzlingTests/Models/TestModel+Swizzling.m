@@ -14,21 +14,21 @@
 - (void)_subMethod:(TestResult *)result
 {
     result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_subMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledSubMethod)];
     [self _subMethod:result];
 }
 
 - (void)_superMethod:(TestResult *)result
 {
     result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_superMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledSubMethod)];
     [self _superMethod:result];
 }
 
 - (void)_overridedMethod:(TestResult *)result
 {
     result.isSwizzledCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"_overridedMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethod)];
+    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledSubMethod)];
     [self _overridedMethod:result];
 }
 

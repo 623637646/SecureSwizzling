@@ -24,7 +24,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
     }
     
     // only sub method + unsecure swizzling
@@ -41,7 +41,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod])
     }
     
     // in overrided method + unsecure swizzling
@@ -58,7 +58,7 @@ class SwizzleWithCopyIMPTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == true) // MARK: It's wrong here
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == true) // MARK: It's wrong here
-        XCTAssert(result.executedMethods == [.swizzledMethod, .subMethod, .superMethod])
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .subMethod, .superMethod])
     }
     
     // test "super object" with "superMethod" method
