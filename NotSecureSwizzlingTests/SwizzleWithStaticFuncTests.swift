@@ -115,7 +115,7 @@ private var IMPCallBackFunc: ((_ self: AnyObject, _ _cmd: Selector, _ result: Te
 
 private func swizzleMethodForTestModel(theClass: AnyClass,
                                        original: Selector,
-                                       replacement: (@escaping (_ self: AnyObject, _ _cmd: Selector, _ result: TestResult) -> Void)) -> Bool {
+                                       replacement: @escaping ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult) -> Void)) -> Bool {
     IMPCallBackFunc = replacement
     return swizzleMethodWithStaticFunc(theClass: theClass,
                                        original: original,
