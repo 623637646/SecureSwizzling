@@ -9,22 +9,6 @@
 #import "TestModel.h"
 #import "NotSecureSwizzlingTests-Swift.h"
 
-@implementation TestSuperModel
-
-- (void)superMethod:(TestResult *)result
-{
-    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"superMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
-}
-
-- (void)overridedMethod:(TestResult *)result
-{
-    result.isSuperCMDWrong = ![NSStringFromSelector(_cmd) isEqualToString:@"overridedMethod:"];
-    result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSuperMethod)];
-}
-
-@end
-
 @implementation TestModel
 
 - (void)subMethod:(TestResult *)result
