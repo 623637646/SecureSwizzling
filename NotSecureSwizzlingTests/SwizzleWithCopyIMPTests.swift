@@ -12,7 +12,9 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // only super method + unsecure swizzling
     func testSuperMethod() {
-        XCTAssert(swizzleSuperMethodWithCopyIMP() == true)
+        XCTAssert(swizzleWithCopyIMP(class: TestModel.self,
+                                     originalSel: #selector(TestModel.superMethod(_:)),
+                                     swizzledSelector: #selector(TestModel._superMethod(_:))) == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -26,7 +28,9 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // only sub method + unsecure swizzling
     func testSubMethod() {
-        XCTAssert(swizzleSubMethodWithCopyIMP() == true)
+        XCTAssert(swizzleWithCopyIMP(class: TestModel.self,
+                                     originalSel: #selector(TestModel.subMethod(_:)),
+                                     swizzledSelector: #selector(TestModel._subMethod(_:))) == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -40,7 +44,9 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // in overrided method + unsecure swizzling
     func testOverridedMethod() {
-        XCTAssert(swizzleOverridedMethodWithCopyIMP() == true)
+        XCTAssert(swizzleWithCopyIMP(class: TestModel.self,
+                                     originalSel: #selector(TestModel.overridedMethod(_:)),
+                                     swizzledSelector: #selector(TestModel._overridedMethod(_:))) == true)
         
         let obj = TestModel()
         let result = TestResult()
@@ -54,32 +60,16 @@ class SwizzleWithCopyIMPTests: XCTestCase {
     
     // test "super object" with "superMethod" method
     func testSuperObject() {
-        XCTAssert(swizzleSuperMethodWithCopyIMP() == true)
+        XCTAssert(swizzleWithCopyIMP(class: TestModel.self,
+                                     originalSel: #selector(TestModel.superMethod(_:)),
+                                     swizzledSelector: #selector(TestModel._superMethod(_:))) == true)
         
         let obj = TestSuperModel()
         let result = TestResult()
         obj.superMethod(result)
         XCTAssert(result.executedMethods == [.superMethod])
     }
-
-}
-
-private func swizzleSuperMethodWithCopyIMP() -> Bool {
-    swizzleWithCopyIMP(class: TestModel.self,
-                           originalSel: #selector(TestModel.superMethod(_:)),
-                           swizzledSelector: #selector(TestModel._superMethod(_:)))
-}
-
-private func swizzleSubMethodWithCopyIMP() -> Bool {
-    swizzleWithCopyIMP(class: TestModel.self,
-                           originalSel: #selector(TestModel.subMethod(_:)),
-                           swizzledSelector: #selector(TestModel._subMethod(_:)))
-}
-
-private func swizzleOverridedMethodWithCopyIMP() -> Bool {
-    swizzleWithCopyIMP(class: TestModel.self,
-                           originalSel: #selector(TestModel.overridedMethod(_:)),
-                           swizzledSelector: #selector(TestModel._overridedMethod(_:)))
+    
 }
 
 private func swizzleWithCopyIMP(`class`: AnyClass, originalSel: Selector, swizzledSelector: Selector) -> Bool {
