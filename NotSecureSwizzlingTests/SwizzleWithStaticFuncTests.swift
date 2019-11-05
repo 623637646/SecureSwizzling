@@ -86,8 +86,60 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.executedMethods == [.superMethod])
     }
     
-    func testSwizzleSubAndSuper() {
+    // crash because Infinite loop
+    func testSwizzleSuperThenSub() {
+        let successForSuper = swizzleMethodForTestModel(theClass: TestSuperModel.self,
+                                                        original: #selector(TestSuperModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledSuperMethod)
+        }
+        XCTAssert(successForSuper == true)
         
+        let successForSub = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                      original: #selector(TestModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledSubMethod)
+        }
+        XCTAssert(successForSub == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledSubMethod, .superMethod])
+    }
+    
+    // sub swizzling not work
+    func testSwizzleSubThenSuper() {
+        let successForSub = swizzleMethodForTestModel(theClass: TestModel.self,
+                                                      original: #selector(TestModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledSubMethod)
+        }
+        XCTAssert(successForSub == true)
+        
+        let successForSuper = swizzleMethodForTestModel(theClass: TestSuperModel.self,
+                                                        original: #selector(TestSuperModel.superMethod(_:)))
+        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledSuperMethod)
+        }
+        XCTAssert(successForSuper == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledSuperMethod, .superMethod])
     }
     
 }
