@@ -144,23 +144,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
 }
 
-private typealias MethodType = @convention(c) (AnyObject, Selector, TestResult) -> Void
 
-private var originalIMPPointer: UnsafeMutablePointer<IMP?> = {
-    let pointer = UnsafeMutablePointer<IMP?>.allocate(capacity: 1)
-    pointer.initialize(to: nil)
-    return pointer
-}()
-
-private let replacementIMP: IMP = unsafeBitCast({
-    (self: AnyObject, _cmd: Selector, result: TestResult) in
-    IMPCallBackFunc?(self, _cmd, result)
-    originalIMPPointer.withMemoryRebound(to: MethodType?.self, capacity: 1) { (pointer) -> Void in
-        pointer.pointee?(self, _cmd, result)
-    }
-} as MethodType, to: IMP.self)
-
-private var IMPCallBackFunc: ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult)->())? = nil
 
 
 // MARK: utilities
