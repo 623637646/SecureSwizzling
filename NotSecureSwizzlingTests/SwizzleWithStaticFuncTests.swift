@@ -12,12 +12,14 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // only super method + secure swizzling
     func testSuperMethod() {
-        let success = swizzleMethodForTestModel(theClass: TestModel.self,
-                                                original: #selector(TestModel.superMethod(_:)))
-        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
             result.executedMethods.append(.swizzledMethodInSub)
         }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.superMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -32,12 +34,14 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // only sub method + secure swizzling
     func testSubMethod() {
-        let success = swizzleMethodForTestModel(theClass: TestModel.self,
-                                                original: #selector(TestModel.subMethod(_:)))
-        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "subMethod:"
             result.executedMethods.append(.swizzledMethodInSub)
         }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.subMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -52,12 +56,14 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // in overrided method + secure swizzling
     func testOverridedMethod() {
-        let success = swizzleMethodForTestModel(theClass: TestModel.self,
-                                                original: #selector(TestModel.overridedMethod(_:)))
-        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "overridedMethod:"
             result.executedMethods.append(.swizzledMethodInSub)
         }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.overridedMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
         XCTAssert(success == true)
         
         let obj = TestModel()
@@ -72,12 +78,14 @@ class SwizzleWithStaticFuncTests: XCTestCase {
     
     // test "super object" with "superMethod" method
     func testSuperObject() {
-        let success = swizzleMethodForTestModel(theClass: TestModel.self,
-                                                original: #selector(TestModel.superMethod(_:)))
-        { (self: AnyObject, _cmd: Selector, result: TestResult) in
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
             result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
             result.executedMethods.append(.swizzledMethodInSub)
         }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.superMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
         XCTAssert(success == true)
         
         let obj = TestSuperModel()
@@ -86,65 +94,74 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.executedMethods == [.superMethod])
     }
     
-//    // crash because Infinite loop
-//    func testSwizzleSuperThenSub() {
-//        let successForSuper = swizzleMethodForTestModel(theClass: TestSuperModel.self,
-//                                                        original: #selector(TestSuperModel.superMethod(_:)))
-//        { (self: AnyObject, _cmd: Selector, result: TestResult) in
-//            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledMethodInSuper)
-//        }
-//        XCTAssert(successForSuper == true)
-//        
-//        let successForSub = swizzleMethodForTestModel(theClass: TestModel.self,
-//                                                      original: #selector(TestModel.superMethod(_:)))
-//        { (self: AnyObject, _cmd: Selector, result: TestResult) in
-//            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledMethodInSub)
-//        }
-//        XCTAssert(successForSub == true)
-//        
-//        let obj = TestModel()
-//        let result = TestResult()
-//        obj.superMethod(result)
-//        
-//        XCTAssert(result.isSubCMDWrong == false)
-//        XCTAssert(result.isSuperCMDWrong == false)
-//        XCTAssert(result.isSwizzledCMDWrong == false)
-//        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
-//    }
-//    
-//    // sub swizzling not work
-//    func testSwizzleSubThenSuper() {
-//        let successForSub = swizzleMethodForTestModel(theClass: TestModel.self,
-//                                                      original: #selector(TestModel.superMethod(_:)))
-//        { (self: AnyObject, _cmd: Selector, result: TestResult) in
-//            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledMethodInSub)
-//        }
-//        XCTAssert(successForSub == true)
-//        
-//        let successForSuper = swizzleMethodForTestModel(theClass: TestSuperModel.self,
-//                                                        original: #selector(TestSuperModel.superMethod(_:)))
-//        { (self: AnyObject, _cmd: Selector, result: TestResult) in
-//            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
-//            result.executedMethods.append(.swizzledMethodInSuper)
-//        }
-//        XCTAssert(successForSuper == true)
-//        
-//        let obj = TestModel()
-//        let result = TestResult()
-//        obj.superMethod(result)
-//        
-//        XCTAssert(result.isSubCMDWrong == false)
-//        XCTAssert(result.isSuperCMDWrong == false)
-//        XCTAssert(result.isSwizzledCMDWrong == false)
-//        XCTAssert(result.executedMethods == [.swizzledMethodInSuper, .superMethod])
-//    }
+    func testSwizzleSuperThenSub() {
+        IMPCallBackFuncForSuper = { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledMethodInSuper)
+        }
+        let successForSuper = swizzleMethodWithStaticFunc(theClass: TestSuperModel.self,
+                                                          original: #selector(TestSuperModel.superMethod(_:)),
+                                                          replacement: replacementIMPForSuper,
+                                                          store: originalIMPPointerForSuper)
+        XCTAssert(successForSuper == true)
+        
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledMethodInSub)
+        }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.superMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
+        XCTAssert(success == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .swizzledMethodInSuper, .superMethod])
+    }
+    
+    func testSwizzleSubThenSuper() {
+        IMPCallBackFunc = { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledMethodInSub)
+        }
+        let success = swizzleMethodWithStaticFunc(theClass: TestModel.self,
+                                                  original: #selector(TestModel.superMethod(_:)),
+                                                  replacement: replacementIMP,
+                                                  store: originalIMPPointer)
+        XCTAssert(success == true)
+        
+        IMPCallBackFuncForSuper = { (self: AnyObject, _cmd: Selector, result: TestResult) in
+            result.isSwizzledCMDWrong = NSStringFromSelector(_cmd) != "superMethod:"
+            result.executedMethods.append(.swizzledMethodInSuper)
+        }
+        let successForSuper = swizzleMethodWithStaticFunc(theClass: TestSuperModel.self,
+                                                          original: #selector(TestSuperModel.superMethod(_:)),
+                                                          replacement: replacementIMPForSuper,
+                                                          store: originalIMPPointerForSuper)
+        XCTAssert(successForSuper == true)
+        
+        let obj = TestModel()
+        let result = TestResult()
+        obj.superMethod(result)
+        
+        XCTAssert(result.isSubCMDWrong == false)
+        XCTAssert(result.isSuperCMDWrong == false)
+        XCTAssert(result.isSwizzledCMDWrong == false)
+        // MARK: It's wrong here
+        XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
+    }
     
 }
 
 private typealias MethodType = @convention(c) (AnyObject, Selector, TestResult) -> Void
+
+// For sub model
 
 private var originalIMPPointer: UnsafeMutablePointer<IMP?> = {
     let pointer = UnsafeMutablePointer<IMP?>.allocate(capacity: 1)
@@ -163,17 +180,26 @@ private let replacementIMP: IMP = unsafeBitCast({
 private var IMPCallBackFunc: ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult)->())? = nil
 
 
-// MARK: utilities
+// For super model
 
-private func swizzleMethodForTestModel(theClass: AnyClass,
-                                       original: Selector,
-                                       replacement: @escaping ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult) -> Void)) -> Bool {
-    IMPCallBackFunc = replacement
-    return swizzleMethodWithStaticFunc(theClass: theClass,
-                                       original: original,
-                                       replacement: replacementIMP,
-                                       store: originalIMPPointer)
-}
+private var originalIMPPointerForSuper: UnsafeMutablePointer<IMP?> = {
+    let pointer = UnsafeMutablePointer<IMP?>.allocate(capacity: 1)
+    pointer.initialize(to: nil)
+    return pointer
+}()
+
+private let replacementIMPForSuper: IMP = unsafeBitCast({
+    (self: AnyObject, _cmd: Selector, result: TestResult) in
+    IMPCallBackFuncForSuper?(self, _cmd, result)
+    originalIMPPointerForSuper.withMemoryRebound(to: MethodType?.self, capacity: 1) { (pointer) -> Void in
+        pointer.pointee?(self, _cmd, result)
+    }
+} as MethodType, to: IMP.self)
+
+private var IMPCallBackFuncForSuper: ((_ self: AnyObject, _ _cmd: Selector, _ result: TestResult)->())? = nil
+
+
+// MARK: utilities
 
 private func swizzleMethodWithStaticFunc(theClass: AnyClass, original: Selector, replacement: IMP, store: UnsafeMutablePointer<IMP?>) -> Bool {
     guard let originalMethod = class_getInstanceMethod(theClass, original) else {
