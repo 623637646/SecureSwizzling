@@ -148,15 +148,15 @@
 				2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */,
 				2ABF8A8C2372E9BB00989124 /* RSSwizzleTests.m */,
 				2ABF8A9523730C0600989124 /* AspectsTests.m */,
-				2AE1987C23605D4D0073B785 /* Others */,
-				2ABF8A9123730B8300989124 /* OpenSource */,
+				2AE1987C23605D4D0073B785 /* Models */,
+				2ABF8A9123730B8300989124 /* Frameworks */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
 			);
 			path = NotSecureSwizzlingTests;
 			sourceTree = "<group>";
 		};
-		2ABF8A9123730B8300989124 /* OpenSource */ = {
+		2ABF8A9123730B8300989124 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				2ABF8A8E2372EA2400989124 /* RSSwizzle.h */,
@@ -164,10 +164,10 @@
 				2ABF8A9323730BD700989124 /* Aspects.h */,
 				2ABF8A9223730BD700989124 /* Aspects.m */,
 			);
-			path = OpenSource;
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
-		2AE1987C23605D4D0073B785 /* Others */ = {
+		2AE1987C23605D4D0073B785 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2A3FEFEC2371828D00AC29FA /* TestSuperModel.h */,
@@ -180,7 +180,7 @@
 				2A3FEFEF237184AD00AC29FA /* TestSuperModel+Swizzling.h */,
 				2A3FEFF0237184AD00AC29FA /* TestSuperModel+Swizzling.m */,
 			);
-			path = Others;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
