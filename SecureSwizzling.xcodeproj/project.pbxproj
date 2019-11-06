@@ -15,6 +15,8 @@
 		2A7089962359757000071FC3 /* SecureSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7089952359757000071FC3 /* SecureSwizzlingTests.swift */; };
 		2A7089982359757000071FC3 /* SecureSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A70898A2359756F00071FC3 /* SecureSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A7089AA2359764F00071FC3 /* SecureSwizzling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7089872359756F00071FC3 /* SecureSwizzling.framework */; };
+		2ABF8A8D2372E9BB00989124 /* RSSwizzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABF8A8C2372E9BB00989124 /* RSSwizzleTests.m */; };
+		2ABF8A902372EA2500989124 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABF8A8F2372EA2500989124 /* RSSwizzle.m */; };
 		2ADE11372362B00100DA6776 /* NoSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE11362362B00100DA6776 /* NoSwizzlingTests.swift */; };
 		2ADE11392362B06900DA6776 /* SwizzleWithStaticFuncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */; };
 		2ADE113C2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */; };
@@ -56,6 +58,9 @@
 		2A7089972359757000071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A7089A52359764F00071FC3 /* NotSecureSwizzlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotSecureSwizzlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7089A92359764F00071FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ABF8A8C2372E9BB00989124 /* RSSwizzleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSwizzleTests.m; sourceTree = "<group>"; };
+		2ABF8A8E2372EA2400989124 /* RSSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSwizzle.h; sourceTree = "<group>"; };
+		2ABF8A8F2372EA2500989124 /* RSSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSwizzle.m; sourceTree = "<group>"; };
 		2ADE11362362B00100DA6776 /* NoSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSwizzlingTests.swift; sourceTree = "<group>"; };
 		2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzleWithStaticFuncTests.swift; sourceTree = "<group>"; };
 		2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzleWithoutCopyIMPTests.swift; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 				2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */,
 				2AF4062C235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift */,
 				2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */,
+				2ABF8A8C2372E9BB00989124 /* RSSwizzleTests.m */,
 				2AE1987C23605D4D0073B785 /* Others */,
 				2A7089A92359764F00071FC3 /* Info.plist */,
 				2A50D04B235DA87200D7D800 /* NotSecureSwizzlingTests-Bridging-Header.h */,
@@ -155,6 +161,8 @@
 				2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */,
 				2A3FEFEF237184AD00AC29FA /* TestSuperModel+Swizzling.h */,
 				2A3FEFF0237184AD00AC29FA /* TestSuperModel+Swizzling.m */,
+				2ABF8A8E2372EA2400989124 /* RSSwizzle.h */,
+				2ABF8A8F2372EA2500989124 /* RSSwizzle.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ABF8A902372EA2500989124 /* RSSwizzle.m in Sources */,
 				2AF4062D235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift in Sources */,
 				2AE1988023605E8A0073B785 /* TestModel+Swizzling.m in Sources */,
 				2ADE11372362B00100DA6776 /* NoSwizzlingTests.swift in Sources */,
@@ -321,6 +330,7 @@
 				2A50D04E235DA87200D7D800 /* TestModel.m in Sources */,
 				2ADE113C2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift in Sources */,
 				2ADE11392362B06900DA6776 /* SwizzleWithStaticFuncTests.swift in Sources */,
+				2ABF8A8D2372E9BB00989124 /* RSSwizzleTests.m in Sources */,
 				2A59C545235EA5BC00518B6B /* TestResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
