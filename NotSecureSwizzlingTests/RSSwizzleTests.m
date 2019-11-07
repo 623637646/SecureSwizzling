@@ -183,4 +183,35 @@
     XCTAssert([result.objc_executedMethods isEqualToArray:expected]);
 }
 
+- (void)testSwizzleTheSameMethodMultipleTimes
+{
+    RSSwizzleInstanceMethod(TestModel.class,
+                            @selector(superMethod:),
+                            RSSWReturnType(void),
+                            RSSWArguments(TestResult *result), RSSWReplacement({
+        result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethodInSub)];
+        RSSWCallOriginal(result);
+    }), RSSwizzleModeAlways, NULL);
+    
+    RSSwizzleInstanceMethod(TestModel.class,
+                            @selector(superMethod:),
+                            RSSWReturnType(void),
+                            RSSWArguments(TestResult *result), RSSWReplacement({
+        result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethodInSub)];
+        RSSWCallOriginal(result);
+    }), RSSwizzleModeAlways, NULL);
+    
+    TestModel *obj = [[TestModel alloc] init];
+    TestResult *result = [[TestResult alloc] init];
+    [obj superMethod:result];
+        
+    XCTAssert(result.isSubCMDWrong == false);
+    XCTAssert(result.isSuperCMDWrong == false);
+    XCTAssert(result.isSwizzledCMDWrong == false);
+    NSArray<NSNumber *> *expected = @[@(ExecutedSwizzledMethodInSub),
+                                      @(ExecutedSwizzledMethodInSub),
+                                      @(ExecutedSuperMethod)];
+    XCTAssert([result.objc_executedMethods isEqualToArray:expected]);
+}
+
 @end
