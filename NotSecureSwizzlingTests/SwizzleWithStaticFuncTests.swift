@@ -153,7 +153,7 @@ class SwizzleWithStaticFuncTests: XCTestCase {
         XCTAssert(result.isSubCMDWrong == false)
         XCTAssert(result.isSuperCMDWrong == false)
         XCTAssert(result.isSwizzledCMDWrong == false)
-        // MARK: It's wrong here
+        // MARK: It's wrong here, should be [.swizzledMethodInSub, .swizzledMethodInSuper, .superMethod]
         XCTAssert(result.executedMethods == [.swizzledMethodInSub, .superMethod])
     }
     
