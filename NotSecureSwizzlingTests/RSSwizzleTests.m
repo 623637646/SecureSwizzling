@@ -190,6 +190,7 @@
                             RSSWReturnType(void),
                             RSSWArguments(TestResult *result), RSSWReplacement({
         result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethodInSub)];
+        NSLog(@"This is the first swizzled method");
         RSSWCallOriginal(result);
     }), RSSwizzleModeAlways, NULL);
     
@@ -198,6 +199,7 @@
                             RSSWReturnType(void),
                             RSSWArguments(TestResult *result), RSSWReplacement({
         result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethodInSub)];
+        NSLog(@"This is the second swizzled method");
         RSSWCallOriginal(result);
     }), RSSwizzleModeAlways, NULL);
     
