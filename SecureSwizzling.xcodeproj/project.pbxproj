@@ -24,6 +24,7 @@
 		2ADE113C2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */; };
 		2AE1988023605E8A0073B785 /* TestModel+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */; };
 		2AF4062D235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4062C235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift */; };
+		2AFC84BC2373C98400BAF875 /* SwizzleWithDynamicIMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC84BB2373C98400BAF875 /* SwizzleWithDynamicIMPTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		2AE1987E23605E8A0073B785 /* TestModel+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestModel+Swizzling.h"; sourceTree = "<group>"; };
 		2AE1987F23605E8A0073B785 /* TestModel+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TestModel+Swizzling.m"; sourceTree = "<group>"; };
 		2AF4062C235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzleWithCopyIMPTests.swift; sourceTree = "<group>"; };
+		2AFC84BB2373C98400BAF875 /* SwizzleWithDynamicIMPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzleWithDynamicIMPTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				2ADE113B2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift */,
 				2AF4062C235DAB850007F0DE /* SwizzleWithCopyIMPTests.swift */,
 				2ADE11382362B06900DA6776 /* SwizzleWithStaticFuncTests.swift */,
+				2AFC84BB2373C98400BAF875 /* SwizzleWithDynamicIMPTests.swift */,
 				2ABF8A9523730C0600989124 /* AspectsTests.m */,
 				2ABF8A8C2372E9BB00989124 /* RSSwizzleTests.m */,
 				2AE1987C23605D4D0073B785 /* Models */,
@@ -345,6 +348,7 @@
 				2ABF8A9623730C0600989124 /* AspectsTests.m in Sources */,
 				2A3FEFEE2371828D00AC29FA /* TestSuperModel.m in Sources */,
 				2A50D04E235DA87200D7D800 /* TestModel.m in Sources */,
+				2AFC84BC2373C98400BAF875 /* SwizzleWithDynamicIMPTests.swift in Sources */,
 				2ADE113C2362B13800DA6776 /* SwizzleWithoutCopyIMPTests.swift in Sources */,
 				2ADE11392362B06900DA6776 /* SwizzleWithStaticFuncTests.swift in Sources */,
 				2ABF8A8D2372E9BB00989124 /* RSSwizzleTests.m in Sources */,
