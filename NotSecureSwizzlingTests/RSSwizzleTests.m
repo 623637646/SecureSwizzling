@@ -17,6 +17,23 @@
 
 @implementation RSSwizzleTests
 
+/*
+ id block = ^id(RSSwizzleInfo *swizzleInfo) {
+     void (*originalImplementation_)(__attribute__((objc_ownership(none))) id, SEL,TestResult *result);
+     SEL selector_ = @selector(superMethod:);
+     return ^void (__attribute__((objc_ownership(none))) id self,TestResult *result) {
+         result.objc_executedMethods = [result.objc_executedMethods arrayByAddingObject:@(ExecutedSwizzledMethodInSub)];
+         
+         ((__typeof(originalImplementation_))[swizzleInfo getOriginalImplementation])(self, selector_,result);
+     };
+ };
+ 
+ [RSSwizzle swizzleInstanceMethod:@selector(superMethod:)
+                          inClass:[TestModel.class class]
+                    newImpFactory:block
+                             mode:RSSwizzleModeAlways
+                              key:((void*)0)];;
+ */
 - (void)testSuperMethod
 {
     RSSwizzleInstanceMethod(TestModel.class,
